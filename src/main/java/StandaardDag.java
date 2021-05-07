@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class StandaardDag implements Dag {
@@ -32,9 +31,10 @@ public class StandaardDag implements Dag {
     }
 
     @Override
-    public void addMaaltijd(String naam, double calorieDoel, double koolhydraatDoel, double eiwitDoel, double vetDoel){
+    public Maaltijd addMaaltijd(String naam, double calorieDoel, double koolhydraatDoel, double eiwitDoel, double vetDoel) {
         Maaltijd maaltijd = new StandaardMaaltijd(naam, calorieDoel, koolhydraatDoel, eiwitDoel, vetDoel);
         this.maaltijden.add(maaltijd);
+        return maaltijd;
     }
 
     @Override

@@ -18,7 +18,7 @@ public class StandaardDagInstellingen implements DagInstellingen {
 
     public StandaardDagInstellingen() {
         this.maaltijden = new ArrayList<>();
-        this.calorieDoel = 2500;
+        this.calorieDoel = 2000;
         this.koolhydraatDoel = 100;
         this.eiwitDoel = 60;
         this.vetDoel = 100;

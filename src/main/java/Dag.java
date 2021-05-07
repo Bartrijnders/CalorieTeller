@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface Dag {
-    void addMaaltijd(String naam, double calorieDoel, double koolhydraatDoel, double eiwitDoel, double vetDoel);
+    Maaltijd addMaaltijd(String naam, double calorieDoel, double koolhydraatDoel, double eiwitDoel, double vetDoel);
 
     void verwijderMaaltijd(Maaltijd maaltijd);
 

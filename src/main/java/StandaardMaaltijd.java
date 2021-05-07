@@ -11,6 +11,7 @@ public class StandaardMaaltijd implements Maaltijd {
     private double vetDoel;
 
     public StandaardMaaltijd(List<Toevoeging> toevoegingen, String naam,  double calorieDoel, double koolhydraatDoel, double eiwitDoel, double vetDoel) {
+        this.naam = naam;
         this.toevoegingen = toevoegingen;
         this.calorieDoel = calorieDoel;
         this.koolhydraatDoel = koolhydraatDoel;
@@ -18,7 +19,9 @@ public class StandaardMaaltijd implements Maaltijd {
         this.vetDoel = vetDoel;
     }
 
+
     public StandaardMaaltijd(String naam, double calorieDoel, double koolhydraatDoel, double eiwitDoel, double vetDoel) {
+        this.naam = naam;
         toevoegingen = new ArrayList<>();
         this.calorieDoel = calorieDoel;
         this.koolhydraatDoel = koolhydraatDoel;
@@ -89,5 +92,14 @@ public class StandaardMaaltijd implements Maaltijd {
 
     public void setNaam(String naam) {
         this.naam = naam;
+    }
+
+    @Override
+    public String toString() {
+        return "naam: " + naam +
+                ", calorieDoel: " + calorieDoel +
+                ", koolhydraatDoel: " + koolhydraatDoel +
+                ", eiwitDoel: " + eiwitDoel +
+                ", vetDoel: " + vetDoel;
     }
 }

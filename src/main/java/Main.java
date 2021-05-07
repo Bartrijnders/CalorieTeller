@@ -1,9 +1,7 @@
-import java.time.Clock;
-import java.time.ZoneId;
-
 public class Main {
     public static void main(String[] args) {
-       DateProvider dateProvider = new SystemDateProvider(Clock.systemDefaultZone());
-        System.out.println(dateProvider.GetCurrentDate());
+        Iteratie1 iteratie1 = new Iteratie1();
+        iteratie1.start();
+
     }
 }

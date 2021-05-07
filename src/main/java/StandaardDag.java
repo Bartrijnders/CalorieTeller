@@ -21,14 +21,14 @@ public class StandaardDag {
         this.totaalVetDoel = totaalVetDoel;
     }
 
-    public StandaardDag(DateProvider dateProvider) {
+    public StandaardDag(DateProvider dateProvider, DagInstellingen dagInstellingen) {
         this.dateProvider = dateProvider;
-        this.maaltijden = new ArrayList<>();
+        this.maaltijden = dagInstellingen.getMaaltijden();
         this.datum = dateProvider.GetCurrentDate();
-        this.totaalCalorieDoel = 0;
-        this.totaalKoolhydraatDoel = 0;
-        this.totaalEiwitDoel = 0;
-        this.totaalVetDoel = 0;
+        this.totaalCalorieDoel = dagInstellingen.getCalorieDoel();
+        this.totaalKoolhydraatDoel = dagInstellingen.getKoolhydraatDoel();
+        this.totaalEiwitDoel = dagInstellingen.getEiwitDoel();
+        this.totaalVetDoel = dagInstellingen.getVetDoel();
     }
 
     public void addMaaltijd(double calorieDoel, double koolhydraatDoel, double eiwitDoel, double vetDoel){

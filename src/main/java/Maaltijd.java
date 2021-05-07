@@ -21,4 +21,8 @@ public interface Maaltijd extends foodItemHolder {
 
     void verwijderItem(MaaltijdToevoeging toevoeging);
 
+    String getNaam();
+
+    void setNaam(String naam);
+
 }

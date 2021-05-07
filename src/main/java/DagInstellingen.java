@@ -1,6 +1,7 @@
 import java.util.List;
 
 public interface DagInstellingen {
+
     double getVetDoel();
 
     void setVetDoel(double vetDoel);
@@ -15,9 +16,10 @@ public interface DagInstellingen {
 
     double getEiwitDoel();
 
+
     void setEiwitDoel(double eiwitDoel);
 
-    void addMaaltijd(double calorieDoel, double koolhydraatDoel, double eiwitDoel, double vetDoel);
+    void addMaaltijd(String naam, double calorieDoel, double koolhydraatDoel, double eiwitDoel, double vetDoel);
 
     List<Maaltijd> getMaaltijden();
 }

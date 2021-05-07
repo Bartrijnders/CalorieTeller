@@ -4,12 +4,13 @@ import java.util.List;
 public class StandaardMaaltijd implements Maaltijd {
 
     private final List<Toevoeging> toevoegingen;
+    private String naam;
     private  double calorieDoel;
     private double koolhydraatDoel;
     private double eiwitDoel;
     private double vetDoel;
 
-    public StandaardMaaltijd(List<Toevoeging> toevoegingen, double calorieDoel, double koolhydraatDoel, double eiwitDoel, double vetDoel) {
+    public StandaardMaaltijd(List<Toevoeging> toevoegingen, String naam,  double calorieDoel, double koolhydraatDoel, double eiwitDoel, double vetDoel) {
         this.toevoegingen = toevoegingen;
         this.calorieDoel = calorieDoel;
         this.koolhydraatDoel = koolhydraatDoel;
@@ -17,7 +18,7 @@ public class StandaardMaaltijd implements Maaltijd {
         this.vetDoel = vetDoel;
     }
 
-    public StandaardMaaltijd(double calorieDoel, double koolhydraatDoel, double eiwitDoel, double vetDoel) {
+    public StandaardMaaltijd(String naam, double calorieDoel, double koolhydraatDoel, double eiwitDoel, double vetDoel) {
         toevoegingen = new ArrayList<>();
         this.calorieDoel = calorieDoel;
         this.koolhydraatDoel = koolhydraatDoel;
@@ -80,5 +81,13 @@ public class StandaardMaaltijd implements Maaltijd {
     @Override
     public void verwijderItem(MaaltijdToevoeging toevoeging) {
         this.toevoegingen.remove(toevoeging);
+    }
+
+    public String getNaam() {
+        return naam;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
     }
 }

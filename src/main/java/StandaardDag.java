@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StandaardDag {
+public class StandaardDag implements Dag {
     private DateProvider dateProvider;
     private List<Maaltijd> maaltijden;
     private LocalDate datum;
@@ -31,51 +31,63 @@ public class StandaardDag {
         this.totaalVetDoel = dagInstellingen.getVetDoel();
     }
 
-    public void addMaaltijd(double calorieDoel, double koolhydraatDoel, double eiwitDoel, double vetDoel){
-        Maaltijd maaltijd = new StandaardMaaltijd(calorieDoel, koolhydraatDoel, eiwitDoel, vetDoel);
+    @Override
+    public void addMaaltijd(String naam, double calorieDoel, double koolhydraatDoel, double eiwitDoel, double vetDoel){
+        Maaltijd maaltijd = new StandaardMaaltijd(naam, calorieDoel, koolhydraatDoel, eiwitDoel, vetDoel);
         this.maaltijden.add(maaltijd);
     }
 
+    @Override
     public void verwijderMaaltijd(Maaltijd maaltijd){
         this.maaltijden.remove(maaltijd);
     }
 
+    @Override
     public double getTotaalCalorieDoel() {
         return totaalCalorieDoel;
     }
 
+    @Override
     public void setTotaalCalorieDoel(double totaalCalorieDoel) {
         this.totaalCalorieDoel = totaalCalorieDoel;
     }
 
+    @Override
     public double getTotaalKoolhydraatDoel() {
         return totaalKoolhydraatDoel;
     }
 
+    @Override
     public void setTotaalKoolhydraatDoel(double totaalKoolhydraatDoel) {
         this.totaalKoolhydraatDoel = totaalKoolhydraatDoel;
     }
 
+    @Override
     public double getTotaalEiwitDoel() {
         return totaalEiwitDoel;
     }
 
+    @Override
     public void setTotaalEiwitDoel(double totaalEiwitDoel) {
         this.totaalEiwitDoel = totaalEiwitDoel;
     }
 
+    @Override
     public double getTotaalVetDoel() {
         return totaalVetDoel;
     }
 
+    @Override
     public void setTotaalVetDoel(double totaalVetDoel) {
         this.totaalVetDoel = totaalVetDoel;
     }
 
+    @Override
     public List<Maaltijd> getMaaltijden() {
         return maaltijden;
     }
 
+    @Override
     public LocalDate getDatum() {
         return datum;
     }

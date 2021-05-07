@@ -18,10 +18,10 @@ public class StandaardDagInstellingen implements DagInstellingen {
 
     public StandaardDagInstellingen() {
         this.maaltijden = new ArrayList<>();
-        this.calorieDoel = 0;
-        this.koolhydraatDoel = 0;
-        this.eiwitDoel = 0;
-        this.vetDoel = 0;
+        this.calorieDoel = 2500;
+        this.koolhydraatDoel = 100;
+        this.eiwitDoel = 60;
+        this.vetDoel = 100;
     }
 
     @Override
@@ -65,8 +65,8 @@ public class StandaardDagInstellingen implements DagInstellingen {
     }
 
     @Override
-    public void addMaaltijd(double calorieDoel, double koolhydraatDoel, double eiwitDoel, double vetDoel){
-        Maaltijd maaltijd = new StandaardMaaltijd(calorieDoel, koolhydraatDoel, eiwitDoel, vetDoel);
+    public void addMaaltijd(String naam, double calorieDoel, double koolhydraatDoel, double eiwitDoel, double vetDoel){
+        Maaltijd maaltijd = new StandaardMaaltijd(naam, calorieDoel, koolhydraatDoel, eiwitDoel, vetDoel);
         this.maaltijden.add(maaltijd);
     }
 

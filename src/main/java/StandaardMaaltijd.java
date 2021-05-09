@@ -82,7 +82,7 @@ public class StandaardMaaltijd implements Maaltijd {
     }
 
     @Override
-    public void verwijderItem(MaaltijdToevoeging toevoeging) {
+    public void verwijderItem(Toevoeging toevoeging) {
         this.toevoegingen.remove(toevoeging);
     }
 
@@ -92,6 +92,42 @@ public class StandaardMaaltijd implements Maaltijd {
 
     public void setNaam(String naam) {
         this.naam = naam;
+    }
+
+    @Override
+    public double getGebruikteCalorieen() {
+        int toReturn = 0;
+        for (Toevoeging toevoeging : toevoegingen) {
+            toReturn += toevoeging.getCalorieWaarde();
+        }
+        return toReturn;
+    }
+
+    @Override
+    public double getGebruikteKoolhydraten() {
+        int toReturn = 0;
+        for (Toevoeging toevoeging : toevoegingen) {
+            toReturn += toevoeging.getKoolhydraatWaarde();
+        }
+        return toReturn;
+    }
+
+    @Override
+    public double getGebruikteEiwitten() {
+        int toReturn = 0;
+        for (Toevoeging toevoeging : toevoegingen) {
+            toReturn += toevoeging.getEiwitWaarde();
+        }
+        return toReturn;
+    }
+
+    @Override
+    public double getGebruikteVetten() {
+        int toReturn = 0;
+        for (Toevoeging toevoeging : toevoegingen) {
+            toReturn += toevoeging.getVetWaarde();
+        }
+        return toReturn;
     }
 
     @Override

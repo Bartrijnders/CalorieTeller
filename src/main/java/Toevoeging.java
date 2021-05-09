@@ -1,4 +1,10 @@
 public interface Toevoeging {
+    Item getItem();
+
+    void setItem(Item item);
+
+    double getHoeveelheidInGram();
+
     double getVetWaarde();
 
     double getEiwitWaarde();
@@ -6,4 +12,6 @@ public interface Toevoeging {
     double getKoolhydraatWaarde();
 
     double getCalorieWaarde();
+
+    void setHoeveelheidInGram(double hoeveelheidInGram);
 }

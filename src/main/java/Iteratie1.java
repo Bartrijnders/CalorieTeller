@@ -45,8 +45,8 @@ public class Iteratie1 {
         printMaaltijden();
         System.out.println();
         System.out.println("wat wilt u doen?");
-        System.out.println("Type 0 voor: Maaltijd Toevoegen, Typ 1 voor: Maaltijd Verwijderen, Type 2 voor: Maaltijd Selecteren");
-        int i = keuzeSelector(2);
+        System.out.println("Type 0 voor: Maaltijd Toevoegen, Typ 1 voor: Maaltijd Verwijderen, Type 2 voor: Maaltijd Selecteren, Type 3 voor: Nieuw Product toevoegen, Type 4 voor: Product Verwijderen");
+        int i = keuzeSelector(33);
         dagKeuze(i);
     }
 
@@ -69,6 +69,21 @@ public class Iteratie1 {
         System.out.println("kies een maaltijd door het nummer voor de maaltijd in te typen.");
         int keuze = keuzeSelector(vandaag.getMaaltijden().size() - 1);
         return vandaag.getMaaltijden().get(keuze);
+    }
+
+    private Toevoeging toevoegingSelector(Maaltijd maaltijd) {
+        printToevoegingen(maaltijd);
+        System.out.println("kies een maaltijd door het nummer voor de maaltijd in te typen.");
+        int keuze = keuzeSelector(maaltijd.getToevoegingen().size() - 1);
+        return maaltijd.getToevoegingen().get(keuze);
+    }
+
+    private void printToevoegingen(Maaltijd maaltijd) {
+        int i = 0;
+        for (Toevoeging toevoeging : maaltijd.getToevoegingen()) {
+            System.out.println(i + ": " + toevoeging.toString());
+            i++;
+        }
     }
 
     private void printMaaltijden() {
@@ -106,7 +121,79 @@ public class Iteratie1 {
                 maaltijdVerwijderen();
             case 2:
                 maaltijdBekijken();
+            case 3:
+                nieuwItemToevoegen();
+            case 4:
+                itemVerwijderen();
+            default:
+                dagMenu();
         }
+    }
+
+    private void nieuwItemToevoegen() {
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------");
+        System.out.println("NIEUW PRODUCT TOEVOEGEN.");
+        System.out.println("Voer een naam voor het nieuwe Product in.");
+        scanner.nextLine();
+        String naam = scanner.nextLine();
+        System.out.println("Hoeveel calorien bevat " + naam + " per 100 gram?");
+        double calorie = scanner.nextDouble();
+        System.out.println("Hoeveel koolhydraten bevat " + naam + " per 100 gram?");
+        double koolhydraat = scanner.nextDouble();
+        System.out.println("Hoeveel eiwit bevat " + naam + " per 100 gram?");
+        double eiwit = scanner.nextDouble();
+        System.out.println("Hoeveel vet bevat " + naam + " per 100 gram?");
+        double vet = scanner.nextDouble();
+        Item item = itemCollectie.foodItemAanmaken(naam, calorie, eiwit, koolhydraat, vet);
+        System.out.println("Nieuw product is toegevoegd!");
+        System.out.println(item.toString());
+        dagMenu();
+    }
+
+    private void itemVerwijderen() {
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------");
+        System.out.println("PRODUCT VERWIJDEREN.");
+        System.out.println("kies een product uit de lijst hieronder om te verwijderen. typ het nummer van het product in.");
+        int i = 0;
+        for (Item item : itemCollectie.getItems()) {
+            System.out.println(i + ": " + item.toString());
+            i++;
+        }
+        int keuze = keuzeSelector(itemCollectie.getItems().size() - 1);
+        Item item = itemCollectie.getItems().remove(keuze);
+        System.out.println("Item: " + item.getNaam() + ", is verwijdert.");
+    }
+
+    private void maaltijdKeuzeMenu(int keuze, Maaltijd maaltijd) {
+        switch (keuze) {
+            case 0:
+                maaltijdItemToevoegen(maaltijd);
+            case 1:
+                maaltijdItemVerwijderen(maaltijd);
+            case 2:
+                dagMenu();
+            default:
+                maaltijdKeuzeMenu(maaltijd);
+        }
+    }
+
+    private void maaltijdItemToevoegen(Maaltijd maaltijd) {
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------");
+        System.out.println("PRODUCT TOEVOEGEN");
+        System.out.println("Kies een product uit de onderstaande lijst door het nummer van het product in te voeren.");
+        int i = 0;
+        for (Item item : itemCollectie.getItems()) {
+            System.out.println(i + ": " + item.toString());
+            i++;
+        }
+        int keuze = keuzeSelector(itemCollectie.getItems().size() - 1);
+        Item itemKeuze = itemCollectie.getItems().get(keuze);
+        System.out.println("U heeft gekozen voor: " + itemKeuze);
+        System.out.println("Vul hieronder de hoeveelheid die u wilt toevoegen van dit product in gram.");
+        double hoeveelheid = scanner.nextDouble();
+        maaltijd.addFoodItem(itemKeuze, hoeveelheid);
+        System.out.println("Item Toegevoegd!");
+        maaltijdKeuzeMenu(maaltijd);
     }
 
     private void maaltijdBekijken() {
@@ -114,14 +201,39 @@ public class Iteratie1 {
         System.out.println(("Maaltijd Bekijken!").toUpperCase());
         System.out.println("selecteer een maaltijd die u wilt Bekijken: ");
         Maaltijd maaltijd = maaltijdSelector();
-        maaltijdMenu(maaltijd);
+        maaltijdKeuzeMenu(maaltijd);
         dagMenu();
     }
 
-    private void maaltijdMenu(Maaltijd maaltijd) {
+    private void maaltijdKeuzeMenu(Maaltijd maaltijd) {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
         System.out.println("Maaltijd: " + maaltijd.getNaam());
-        System.out.println("Calorie: " + maaltijd.getCalorieDoel());
+        System.out.println("Calorie: " + maaltijd.getGebruikteCalorieen() + "/" + maaltijd.getCalorieDoel());
+        System.out.println("Koolhydraat: " + maaltijd.getGebruikteKoolhydraten() + "/" + maaltijd.getKoolhydraatDoel());
+        System.out.println("Eiwit: " + maaltijd.getGebruikteEiwitten() + "/" + maaltijd.getEiwitDoel());
+        System.out.println("Vet: " + maaltijd.getGebruikteVetten() + "/" + maaltijd.getVetDoel());
+        System.out.println("Items in deze maaltijd: ");
+        if (maaltijd.getToevoegingen().isEmpty()) {
+            System.out.println("Deze maaltijd bevat nog geen items.");
+        } else {
+            for (Toevoeging toevoeging : maaltijd.getToevoegingen()) {
+                System.out.println(toevoeging.toString());
+            }
+        }
+        System.out.println("Type 0 voor: Item Toevoegen, Typ 1 voor: Item Verwijderen, typ 2 voor: Terug");
+        int i = keuzeSelector(2);
+        maaltijdKeuzeMenu(i, maaltijd);
+
+    }
+
+    private void maaltijdItemVerwijderen(Maaltijd maaltijd) {
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------");
+        System.out.println(("Item verwijderen!").toUpperCase());
+        System.out.println("selecteer een maaltijd die u wilt verwijderen: ");
+        Toevoeging toevoeging = toevoegingSelector(maaltijd);
+        maaltijd.verwijderItem(toevoeging);
+        System.out.println("Item verwijdert: " + toevoeging.toString());
+        maaltijdKeuzeMenu(maaltijd);
     }
 
     private void maaltijdVerwijderen() {

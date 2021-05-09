@@ -19,10 +19,18 @@ public interface Maaltijd extends foodItemHolder {
 
     void setVetDoel(double vetDoel);
 
-    void verwijderItem(MaaltijdToevoeging toevoeging);
+    void verwijderItem(Toevoeging toevoeging);
 
     String getNaam();
 
     void setNaam(String naam);
+
+    double getGebruikteCalorieen();
+
+    double getGebruikteKoolhydraten();
+
+    double getGebruikteEiwitten();
+
+    double getGebruikteVetten();
 
 }

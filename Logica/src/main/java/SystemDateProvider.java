@@ -1,6 +1,5 @@
 import java.time.Clock;
 import java.time.LocalDate;
-import java.time.ZoneId;
 
 public class SystemDateProvider implements DateProvider {
 

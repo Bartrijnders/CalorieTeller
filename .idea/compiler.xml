@@ -6,7 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="CalorieTeller" />
+        <module name="UI" />
+        <module name="Data" />
+        <module name="Logica" />
       </profile>
     </annotationProcessing>
   </component>

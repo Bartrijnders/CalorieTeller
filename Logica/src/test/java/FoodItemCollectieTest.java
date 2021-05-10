@@ -1,3 +1,5 @@
+import doa.ItemDoa;
+import doa.fakes.FakeItemDoaImpl;
 import models.*;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -16,12 +18,13 @@ class FoodItemCollectieTest {
 
     @Mock
     ItemValidator itemValidator = Mockito.mock(ItemValidator.class);
+    ItemDoa itemDoa = new FakeItemDoaImpl();
 
     ItemValidator test = new ItemValidator100g();
 
     @Spy
     @InjectMocks
-    ItemCollectie itemCollectie = new FoodItemCollectie(itemValidator);
+    ItemCollectie itemCollectie = new FoodItemCollectie(itemDoa,itemValidator);
 
 
 

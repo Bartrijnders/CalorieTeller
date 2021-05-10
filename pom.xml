@@ -12,6 +12,7 @@
         <module>Data</module>
         <module>Logica</module>
         <module>UI</module>
+        <module>UI_JavaFX</module>
     </modules>
     <dependencies>
         <dependency>

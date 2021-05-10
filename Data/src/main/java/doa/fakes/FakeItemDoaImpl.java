@@ -1,5 +1,6 @@
-package doa;
+package doa.fakes;
 
+import doa.ItemDoa;
 import models.FoodItem;
 import models.Item;
 

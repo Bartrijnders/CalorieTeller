@@ -9,4 +9,5 @@ public interface DagDao {
     List<Dag> getAllDagen();
     void storeDag(Dag dag);
     Dag getDagByDate(LocalDate date);
+    Dag getToday();
 }

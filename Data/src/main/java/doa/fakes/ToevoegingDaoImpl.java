@@ -1,5 +1,6 @@
-package doa;
+package doa.fakes;
 
+import doa.ToevoegingDao;
 import models.Maaltijd;
 import models.Toevoeging;
 

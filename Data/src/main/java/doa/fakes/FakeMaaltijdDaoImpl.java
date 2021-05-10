@@ -1,5 +1,7 @@
-package doa;
+package doa.fakes;
 
+import doa.DagDao;
+import doa.MaaltijdDoa;
 import models.Dag;
 import models.Maaltijd;
 
@@ -7,7 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FakeMaaltijdDaoImpl implements MaaltijdDoa{
+public class FakeMaaltijdDaoImpl implements MaaltijdDoa {
 
     private DagDao dagDao;
 

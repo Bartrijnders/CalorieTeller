@@ -1,5 +1,6 @@
-package doa;
+package doa.fakes;
 
+import doa.DagInstellingenDao;
 import models.DagInstellingen;
 import models.StandaardDagInstellingen;
 

@@ -6,10 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Data" />
-        <module name="UI" />
         <module name="UI_JavaFX" />
-        <module name="Logica" />
+        <module name="logica" />
+        <module name="ui" />
+        <module name="data" />
       </profile>
     </annotationProcessing>
   </component>

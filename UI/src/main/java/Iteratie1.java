@@ -45,7 +45,7 @@ public class Iteratie1 {
         printMaaltijden();
         System.out.println();
         System.out.println("wat wilt u doen?");
-        System.out.println("Type 0 voor: Maaltijd Toevoegen, Typ 1 voor: Maaltijd Verwijderen, Type 2 voor: Maaltijd Selecteren, Type 3 voor: Nieuw Product toevoegen, Type 4 voor: Product Verwijderen");
+        System.out.println("Type 0 voor: models.Maaltijd Toevoegen, Typ 1 voor: models.Maaltijd Verwijderen, Type 2 voor: models.Maaltijd Selecteren, Type 3 voor: Nieuw Product toevoegen, Type 4 voor: Product Verwijderen");
         int i = keuzeSelector(33);
         dagKeuze(i);
     }
@@ -96,7 +96,7 @@ public class Iteratie1 {
 
     private void maaltijdToevoegen() {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
-        System.out.println(("Maaltijd aanmaken!").toUpperCase());
+        System.out.println(("models.Maaltijd aanmaken!").toUpperCase());
         System.out.println("Vul een naam in:");
         scanner.nextLine();
         String naam = scanner.nextLine();
@@ -109,7 +109,7 @@ public class Iteratie1 {
         System.out.println("Vul een vet doel in: ");
         double vet = scanner.nextDouble();
         Maaltijd maaltijd = vandaag.addMaaltijd(naam, calorie, koolhydraat, eiwit, vet);
-        System.out.println("Nieuwe Maaltijd toegevoegd: " + maaltijd.toString());
+        System.out.println("Nieuwe models.Maaltijd toegevoegd: " + maaltijd.toString());
         dagMenu();
     }
 
@@ -161,7 +161,7 @@ public class Iteratie1 {
         }
         int keuze = keuzeSelector(itemCollectie.getItems().size() - 1);
         Item item = itemCollectie.getItems().remove(keuze);
-        System.out.println("Item: " + item.getNaam() + ", is verwijdert.");
+        System.out.println("models.Item: " + item.getNaam() + ", is verwijdert.");
     }
 
     private void maaltijdKeuzeMenu(int keuze, Maaltijd maaltijd) {
@@ -192,13 +192,13 @@ public class Iteratie1 {
         System.out.println("Vul hieronder de hoeveelheid die u wilt toevoegen van dit product in gram.");
         double hoeveelheid = scanner.nextDouble();
         maaltijd.addFoodItem(itemKeuze, hoeveelheid);
-        System.out.println("Item Toegevoegd!");
+        System.out.println("models.Item Toegevoegd!");
         maaltijdKeuzeMenu(maaltijd);
     }
 
     private void maaltijdBekijken() {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
-        System.out.println(("Maaltijd Bekijken!").toUpperCase());
+        System.out.println(("models.Maaltijd Bekijken!").toUpperCase());
         System.out.println("selecteer een maaltijd die u wilt Bekijken: ");
         Maaltijd maaltijd = maaltijdSelector();
         maaltijdKeuzeMenu(maaltijd);
@@ -207,7 +207,7 @@ public class Iteratie1 {
 
     private void maaltijdKeuzeMenu(Maaltijd maaltijd) {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
-        System.out.println("Maaltijd: " + maaltijd.getNaam());
+        System.out.println("models.Maaltijd: " + maaltijd.getNaam());
         System.out.println("Calorie: " + maaltijd.getGebruikteCalorieen() + "/" + maaltijd.getCalorieDoel());
         System.out.println("Koolhydraat: " + maaltijd.getGebruikteKoolhydraten() + "/" + maaltijd.getKoolhydraatDoel());
         System.out.println("Eiwit: " + maaltijd.getGebruikteEiwitten() + "/" + maaltijd.getEiwitDoel());
@@ -220,7 +220,7 @@ public class Iteratie1 {
                 System.out.println(toevoeging.toString());
             }
         }
-        System.out.println("Type 0 voor: Item Toevoegen, Typ 1 voor: Item Verwijderen, typ 2 voor: Terug");
+        System.out.println("Type 0 voor: models.Item Toevoegen, Typ 1 voor: models.Item Verwijderen, typ 2 voor: Terug");
         int i = keuzeSelector(2);
         maaltijdKeuzeMenu(i, maaltijd);
 
@@ -228,21 +228,21 @@ public class Iteratie1 {
 
     private void maaltijdItemVerwijderen(Maaltijd maaltijd) {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
-        System.out.println(("Item verwijderen!").toUpperCase());
+        System.out.println(("models.Item verwijderen!").toUpperCase());
         System.out.println("selecteer een maaltijd die u wilt verwijderen: ");
         Toevoeging toevoeging = toevoegingSelector(maaltijd);
         maaltijd.verwijderItem(toevoeging);
-        System.out.println("Item verwijdert: " + toevoeging.toString());
+        System.out.println("models.Item verwijdert: " + toevoeging.toString());
         maaltijdKeuzeMenu(maaltijd);
     }
 
     private void maaltijdVerwijderen() {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
-        System.out.println(("Maaltijd verwijderen!").toUpperCase());
+        System.out.println(("models.Maaltijd verwijderen!").toUpperCase());
         System.out.println("selecteer een maaltijd die u wilt verwijderen: ");
         Maaltijd maaltijd = maaltijdSelector();
         vandaag.verwijderMaaltijd(maaltijd);
-        System.out.println("Maaltijd verwijdert: " + maaltijd.toString());
+        System.out.println("models.Maaltijd verwijdert: " + maaltijd.toString());
         dagMenu();
 
     }

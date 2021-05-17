@@ -40,6 +40,7 @@ public class StandaardDag implements Dag {
     }
 
     @Override
+    //test
     public void verwijderMaaltijd(Maaltijd maaltijd){
         this.maaltijden.remove(maaltijd);
     }

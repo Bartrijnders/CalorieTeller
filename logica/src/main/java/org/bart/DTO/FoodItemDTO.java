@@ -42,5 +42,8 @@ public class FoodItemDTO implements ItemDTO {
         return item.getVetWaarde();
     }
 
-
+    @Override
+    public String toString() {
+        return item.toString();
+    }
 }

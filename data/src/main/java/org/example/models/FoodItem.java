@@ -64,11 +64,10 @@ public class FoodItem implements Item {
 
     @Override
     public String toString() {
-        return "org.bart.models.Item: " +
-                "naam='" + naam + '\'' +
-                ", calorieWaarde=" + calorieWaarde +
-                ", vetWaarde=" + vetWaarde +
-                ", koolhydraatWaarde=" + koolhydraatWaarde +
-                ", eiwitWaarde=" + eiwitWaarde;
+        return  "naam: '" + naam + '\'' +
+                ", calorieWaarde: " + calorieWaarde +
+                ", vetWaarde: " + vetWaarde +
+                ", koolhydraatWaarde: " + koolhydraatWaarde +
+                ", eiwitWaarde: " + eiwitWaarde;
     }
 }

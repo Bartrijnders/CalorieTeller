@@ -147,4 +147,9 @@ public class StandaardMaaltijd implements Maaltijd {
                 ", eiwitDoel: " + eiwitDoel +
                 ", vetDoel: " + vetDoel;
     }
+
+    @Override
+    public void addToevoeging(Toevoeging toevoeging) {
+        this.toevoegingen.add(toevoeging);
+    }
 }

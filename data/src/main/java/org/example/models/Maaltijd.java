@@ -36,6 +36,8 @@ public interface Maaltijd extends foodItemHolder {
 
     double getGebruikteVetten();
 
+    void addToevoeging(Toevoeging toevoeging);
+
     UUID getId();
 
 }

@@ -11,6 +11,13 @@
 
     <artifactId>Data</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.20</version>
+        </dependency>
+    </dependencies>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

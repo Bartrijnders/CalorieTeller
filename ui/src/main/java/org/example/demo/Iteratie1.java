@@ -6,6 +6,7 @@ import org.bart.DTO.MaaltijdDTO;
 import org.bart.DTO.ToevoegingDTO;
 import org.bart.services.ServiceContainter;
 
+import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -96,7 +97,12 @@ public class Iteratie1 {
         double eiwit = scanner.nextDouble();
         System.out.println("Vul een vet doel in: ");
         double vet = scanner.nextDouble();
-        MaaltijdDTO maaltijd = container.getStandaardDagCollectie().maaltijdAanDagToevoegen(dagDTO.getDatum(),naam, calorie, koolhydraat, eiwit, vet);
+        MaaltijdDTO maaltijd = null;
+        try {
+            maaltijd = container.getStandaardDagCollectie().maaltijdAanDagToevoegen(dagDTO.getDatum(),naam, calorie, koolhydraat, eiwit, vet);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         System.out.println("Nieuwe Maaltijd toegevoegd: " + maaltijd.toString());
         dagMenu();
     }

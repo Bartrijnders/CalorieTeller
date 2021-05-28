@@ -22,7 +22,7 @@ public class ItemPostgresDao implements ItemDoa {
     }
 
     @Override
-    public List<Item> getAllItems() {
+    public List<Item> getAllItems() throws SQLException{
         String sql = "SELECT * FROM item";
         List<Item> items = new ArrayList<>();
         try(Connection conn = dBconnection.connect();
@@ -41,15 +41,13 @@ public class ItemPostgresDao implements ItemDoa {
                 items.add(foodItem);
             }
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
 
         return items;
     }
 
     @Override
-    public void deleteItem(Item item) {
+    public void deleteItem(Item item) throws SQLException {
         String sql = "DELETE FROM item WHERE id::text = ?";
 
         try(Connection conn = dBconnection.connect();
@@ -59,13 +57,11 @@ public class ItemPostgresDao implements ItemDoa {
 
             preparedStatement.executeUpdate();
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
     }
 
     @Override
-    public void storeItem(Item item) {
+    public void storeItem(Item item) throws SQLException{
         String sql = "INSERT INTO item(id, naam, caloriewaarde,koolhydraatwaarde, eiwitwaarde, vetwaarde) " +
                 "VALUES (?,?,?,?,?,?)";
 
@@ -81,14 +77,12 @@ public class ItemPostgresDao implements ItemDoa {
 
             preparedStatement.executeUpdate();
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
 
     }
 
     @Override
-    public Item getItemByID(UUID id) {
+    public Item getItemByID(UUID id) throws SQLException {
         String sql = "SELECT * FROM item WHERE id::text = ?";
         Item toReturn = null;
         try(Connection conn = dBconnection.connect();
@@ -107,8 +101,6 @@ public class ItemPostgresDao implements ItemDoa {
                 toReturn = new FoodItem(naam, cal, vet, kol, eiw, uuid);
             }
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
         return toReturn ;
     }

@@ -35,6 +35,16 @@ public class StandaardMaaltijd implements Maaltijd {
         this.vetDoel = vetDoel;
     }
 
+    public StandaardMaaltijd(UUID id, String naam, double calorieDoel, double koolhydraatDoel, double eiwitDoel, double vetDoel) {
+        this.naam = naam;
+        this.toevoegingen = new ArrayList<>();
+        this.id = id;
+        this.calorieDoel = calorieDoel;
+        this.koolhydraatDoel = koolhydraatDoel;
+        this.eiwitDoel = eiwitDoel;
+        this.vetDoel = vetDoel;
+    }
+
     @Override
     public UUID getId(){return id;}
 

@@ -28,7 +28,7 @@ public class ToevoegingPostgresDao implements ToevoegingDao {
     }
 
     @Override
-    public List<Toevoeging> getAllToevoegingen(Maaltijd maaltijd) {
+    public List<Toevoeging> getAllToevoegingen(Maaltijd maaltijd) throws SQLException {
 
         String sql = "SELECT * FROM toevoeging WHERE maaltijdid::text = ?;";
         List<Toevoeging> toevoegingen  = new ArrayList<>();
@@ -48,15 +48,13 @@ public class ToevoegingPostgresDao implements ToevoegingDao {
                 maaltijd.addToevoeging(toevoeging);
             }
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
 
         return toevoegingen;
     }
 
     @Override
-    public void storeToevoeging(Toevoeging toevoeging, Maaltijd maaltijd) {
+    public void storeToevoeging(Toevoeging toevoeging, Maaltijd maaltijd) throws SQLException{
         String sql = "INSERT INTO toevoeging (id, hoeveelheidingram, maaltijdid, itemid) " +
                 "VALUES (?,?,?,?);";
 
@@ -69,8 +67,6 @@ public class ToevoegingPostgresDao implements ToevoegingDao {
             preparedStatement.setObject(4,toevoeging.getItem().getID());
             preparedStatement.executeUpdate();
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
     }
 
@@ -90,7 +86,7 @@ public class ToevoegingPostgresDao implements ToevoegingDao {
     }
 
     @Override
-    public Toevoeging getByID(UUID id, Maaltijd maaltijd) {
+    public Toevoeging getByID(UUID id, Maaltijd maaltijd) throws SQLException {
         String sql = "SELECT * FROM toevoeging WHERE id::text = ?;";
         Toevoeging toevoeging = null;
         try(Connection conn = dBconnection.connect();
@@ -108,8 +104,6 @@ public class ToevoegingPostgresDao implements ToevoegingDao {
                 toevoeging = new MaaltijdToevoeging(hig, item, uuid);
             }
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
 
         return toevoeging;

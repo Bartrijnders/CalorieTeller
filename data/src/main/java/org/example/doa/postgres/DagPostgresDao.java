@@ -22,7 +22,7 @@ public class DagPostgresDao implements DagDao {
     }
 
     @Override
-    public List<Dag> getAllDagen() {
+    public List<Dag> getAllDagen() throws SQLException{
         String sql = "SELECT * FROM dag";
         List<Item> items = new ArrayList<>();
         try(Connection conn = dBconnection.connect();

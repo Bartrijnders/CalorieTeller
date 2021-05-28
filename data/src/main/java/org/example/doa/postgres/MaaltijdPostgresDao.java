@@ -1,6 +1,7 @@
 package org.example.doa.postgres;
 
 import org.example.dbConncetion.DBconnection;
+import org.example.doa.InstellingMaaltijdDao;
 import org.example.doa.MaaltijdDoa;
 import org.example.doa.ToevoegingDao;
 import org.example.models.*;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class MaaltijdPostgresDao implements MaaltijdDoa {
+public class MaaltijdPostgresDao implements MaaltijdDoa , InstellingMaaltijdDao {
 
     private final DBconnection dBconnection;
     private final ToevoegingDao toevoegingDao;
@@ -126,5 +127,29 @@ public class MaaltijdPostgresDao implements MaaltijdDoa {
 
         }
         return maaltijd;
+    }
+
+    @Override
+    public List<Maaltijd> getInstellingsMaaltijden(DagInstellingen dagInstellingen) throws SQLException {
+
+        String sql = "SELECT * FROM maaltijd WHERE daginstellingenid::text = ?";
+        List<Maaltijd> maaltijden  = new ArrayList<>();
+        try(Connection conn = dBconnection.connect();
+            PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setString(1, dagInstellingen.getId().toString());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                UUID id = UUID.fromString(resultSet.getString("id"));
+                String naam = resultSet.getString("naam");
+                double cal = resultSet.getDouble("caloriedoel");
+                double kol = resultSet.getDouble("koolhydraatdoel");
+                double eiw = resultSet.getDouble("eiwitdoel");
+                double vet = resultSet.getDouble("vetdoel");
+                Maaltijd maaltijd = new StandaardMaaltijd(id, naam, cal, kol, eiw , vet);
+                maaltijden.add(maaltijd);
+            }
+
+        }
+        return maaltijden;
     }
 }

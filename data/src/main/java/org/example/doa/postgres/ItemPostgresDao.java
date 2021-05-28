@@ -1,7 +1,7 @@
 package org.example.doa.postgres;
 
 import org.example.dbConncetion.DBconnection;
-import org.example.doa.ItemDoa;
+import org.example.doa.ItemDao;
 import org.example.models.FoodItem;
 import org.example.models.Item;
 
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ItemPostgresDao implements ItemDoa {
+public class ItemPostgresDao implements ItemDao {
 
     private final DBconnection dBconnection;
 

@@ -1,8 +1,11 @@
 package org.example.models;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface DagInstellingen {
+
+    UUID getId();
 
     double getVetDoel();
 
@@ -18,6 +21,7 @@ public interface DagInstellingen {
 
     double getEiwitDoel();
 
+    void setMaaltijden(List<Maaltijd> maaltijden);
 
     void setEiwitDoel(double eiwitDoel);
 

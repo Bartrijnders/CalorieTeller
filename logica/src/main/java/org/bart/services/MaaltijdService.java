@@ -1,6 +1,6 @@
 package org.bart.services;
 
-import org.example.doa.ItemDoa;
+import org.example.doa.ItemDao;
 import org.example.doa.MaaltijdDoa;
 import org.example.doa.ToevoegingDao;
 import org.example.doa.fakes.FakeToevoegingDaoImpl;
@@ -17,12 +17,12 @@ import java.util.UUID;
 public class MaaltijdService {
 
     private final MaaltijdDoa maaltijdDoa;
-    private final ItemDoa itemDoa;
+    private final ItemDao itemDao;
     private final ToevoegingDao toevoegingDao;
 
-    public MaaltijdService(MaaltijdDoa maaltijdDoa, ItemDoa itemDoa) {
+    public MaaltijdService(MaaltijdDoa maaltijdDoa, ItemDao itemDao) {
         this.maaltijdDoa = maaltijdDoa;
-        this.itemDoa = itemDoa;
+        this.itemDao = itemDao;
         this.toevoegingDao = new FakeToevoegingDaoImpl();
     }
 
@@ -31,7 +31,7 @@ public class MaaltijdService {
     }
 
     public void addItem(UUID maaltijdId, UUID itemId, LocalDate date, double hoeveelheidInGram) throws SQLException {
-        Item item = itemDoa.getItemByID(itemId);
+        Item item = itemDao.getItemByID(itemId);
         Maaltijd maaltijd = maaltijdDoa.getMaaltijd(maaltijdId,date);
         maaltijd.addFoodItem(item, hoeveelheidInGram);
     }

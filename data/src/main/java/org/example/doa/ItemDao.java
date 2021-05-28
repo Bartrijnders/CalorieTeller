@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
-public interface ItemDoa {
+public interface ItemDao {
     List<Item> getAllItems() throws SQLException;
     void deleteItem(Item item) throws SQLException;
     void storeItem(Item item) throws SQLException;

@@ -1,6 +1,6 @@
 package org.example.doa.fakes;
 
-import org.example.doa.ItemDoa;
+import org.example.doa.ItemDao;
 import org.example.models.FoodItem;
 import org.example.models.Item;
 
@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class FakeItemDoaImpl implements ItemDoa {
+public class FakeItemDaoImpl implements ItemDao {
 
     private final List<Item> items;
 
-    public FakeItemDoaImpl() {
+    public FakeItemDaoImpl() {
         this.items = new ArrayList<>();
         Item item = new FoodItem("Banaan", 92, 1, 20, 0.3);
         Item item1 = new FoodItem("Hardgekookt ei", 128, 12.4, 0, 8.8);

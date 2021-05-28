@@ -1,8 +1,8 @@
 import org.bart.DTO.ItemDTO;
 import org.bart.services.FoodItemCollectie;
 import org.bart.services.ItemCollectie;
-import org.example.doa.ItemDoa;
-import org.example.doa.fakes.FakeItemDoaImpl;
+import org.example.doa.ItemDao;
+import org.example.doa.fakes.FakeItemDaoImpl;
 import org.example.models.FoodItem;
 import org.example.models.ItemValidator;
 import org.example.models.ItemValidator100g;
@@ -23,13 +23,13 @@ class FoodItemCollectieTest {
 
     @Mock
     ItemValidator itemValidator = Mockito.mock(ItemValidator.class);
-    ItemDoa itemDoa = new FakeItemDoaImpl();
+    ItemDao itemDao = new FakeItemDaoImpl();
 
     ItemValidator test = new ItemValidator100g();
 
     @Spy
     @InjectMocks
-    ItemCollectie itemCollectie = new FoodItemCollectie(itemDoa,itemValidator);
+    ItemCollectie itemCollectie = new FoodItemCollectie(itemDao,itemValidator);
 
 
 

@@ -1,7 +1,7 @@
 package org.example.doa.postgres;
 
 import org.example.dbConncetion.DBconnection;
-import org.example.doa.ItemDoa;
+import org.example.doa.ItemDao;
 import org.example.doa.ToevoegingDao;
 import org.example.models.Item;
 import org.example.models.Maaltijd;
@@ -20,11 +20,11 @@ public class ToevoegingPostgresDao implements ToevoegingDao {
 
 
     private final DBconnection dBconnection;
-    private final ItemDoa itemDoa;
+    private final ItemDao itemDao;
 
-    public ToevoegingPostgresDao(DBconnection dBconnection, ItemDoa itemDoa) {
+    public ToevoegingPostgresDao(DBconnection dBconnection, ItemDao itemDao) {
         this.dBconnection = dBconnection;
-        this.itemDoa = itemDoa;
+        this.itemDao = itemDao;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class ToevoegingPostgresDao implements ToevoegingDao {
                 UUID id = UUID.fromString(resultSet.getString("id"));
                 int hig = resultSet.getInt("hoeveelheidingram");
                 UUID itemID = UUID.fromString(resultSet.getString("itemid"));
-                Item item = itemDoa.getItemByID(itemID);
+                Item item = itemDao.getItemByID(itemID);
                 Toevoeging toevoeging = new MaaltijdToevoeging(hig, item, id);
                 maaltijd.addToevoeging(toevoeging);
             }
@@ -100,7 +100,7 @@ public class ToevoegingPostgresDao implements ToevoegingDao {
                 UUID uuid = UUID.fromString(resultSet.getString("id"));
                 int hig = resultSet.getInt("hoeveelheidingram");
                 UUID itemID = UUID.fromString(resultSet.getString("itemid"));
-                Item item = itemDoa.getItemByID(itemID);
+                Item item = itemDao.getItemByID(itemID);
                 toevoeging = new MaaltijdToevoeging(hig, item, uuid);
             }
 

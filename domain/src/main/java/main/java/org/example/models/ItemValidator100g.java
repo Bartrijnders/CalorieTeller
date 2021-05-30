@@ -1,4 +1,4 @@
-package org.example.models;
+package main.java.org.example.models;
 
 public class ItemValidator100g implements ItemValidator {
 

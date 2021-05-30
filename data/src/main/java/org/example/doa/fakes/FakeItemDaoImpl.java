@@ -1,8 +1,8 @@
 package org.example.doa.fakes;
 
 import org.example.doa.ItemDao;
-import org.example.models.FoodItem;
-import org.example.models.Item;
+import main.java.org.example.models.FoodItem;
+import main.java.org.example.models.Item;
 
 import java.util.ArrayList;
 import java.util.List;

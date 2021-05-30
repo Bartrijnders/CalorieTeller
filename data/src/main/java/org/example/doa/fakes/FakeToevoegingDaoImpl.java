@@ -1,8 +1,8 @@
 package org.example.doa.fakes;
 
 import org.example.doa.ToevoegingDao;
-import org.example.models.Maaltijd;
-import org.example.models.Toevoeging;
+import main.java.org.example.models.Maaltijd;
+import main.java.org.example.models.Toevoeging;
 
 import java.util.List;
 import java.util.UUID;

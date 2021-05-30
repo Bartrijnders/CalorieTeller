@@ -3,10 +3,9 @@ package org.example.doa.postgres;
 import org.example.dbConncetion.DBconnection;
 import org.example.doa.DagInstellingenDao;
 import org.example.doa.InstellingMaaltijdDao;
-import org.example.models.DagInstellingen;
-import org.example.models.StandaardDagInstellingen;
+import main.java.org.example.models.DagInstellingen;
+import main.java.org.example.models.StandaardDagInstellingen;
 
-import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,8 +30,6 @@ public class InstellingenPostgresDao implements DagInstellingenDao {
         try(Connection connection = dBconnection.connect();
             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
             ResultSet resultSet = preparedStatement.executeQuery();
-
-
             while (resultSet.next()){
                 UUID id = UUID.fromString(resultSet.getString("id"));
                 double cal = resultSet.getDouble("caloriedoel");
@@ -44,7 +41,6 @@ public class InstellingenPostgresDao implements DagInstellingenDao {
 
             }
         }
-
         return dagInstellingen;
     }
 }

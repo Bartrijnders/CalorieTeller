@@ -1,10 +1,13 @@
 package org.example.doa.postgres;
 
+import main.java.org.example.models.Dag;
+import main.java.org.example.models.DagInstellingen;
+import main.java.org.example.models.Maaltijd;
+import main.java.org.example.models.StandaardMaaltijd;
 import org.example.dbConncetion.DBconnection;
 import org.example.doa.InstellingMaaltijdDao;
 import org.example.doa.MaaltijdDoa;
 import org.example.doa.ToevoegingDao;
-import org.example.models.*;
 
 import java.sql.*;
 import java.time.LocalDate;

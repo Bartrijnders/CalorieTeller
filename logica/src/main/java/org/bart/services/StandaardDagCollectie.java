@@ -6,8 +6,8 @@ import org.bart.DTO.StandaardDagDTO;
 import org.bart.DTO.StandaardMaaltijdDTO;
 import org.example.doa.DagDao;
 import org.example.doa.MaaltijdDoa;
-import org.example.models.Dag;
-import org.example.models.Maaltijd;
+import main.java.org.example.models.Dag;
+import main.java.org.example.models.Maaltijd;
 
 import java.sql.SQLException;
 import java.time.LocalDate;

@@ -1,15 +1,17 @@
 package org.example.doa.postgres;
 
+import main.java.org.example.models.Dag;
+import main.java.org.example.models.DateProvider;
+import main.java.org.example.models.Maaltijd;
+import main.java.org.example.models.StandaardDag;
 import org.example.dbConncetion.DBconnection;
 import org.example.doa.DagDao;
 import org.example.doa.MaaltijdDoa;
-import org.example.models.*;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class DagPostgresDao implements DagDao {
 
@@ -101,13 +103,16 @@ public class DagPostgresDao implements DagDao {
             preparedStatement.setDate(1, Date.valueOf(LocalDate.now()));
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            LocalDate localDate = resultSet.getDate("datum").toLocalDate();
-            double cal = resultSet.getDouble("caloriedoel");
-            double kol = resultSet.getDouble("koolhydraatdoel");
-            double eiw = resultSet.getDouble("eiwitdoel");
-            double vet = resultSet.getDouble("vetdoel");
-            List<Maaltijd> maaltijden = maaltijdDoa.getMaaltijdenPerDag(LocalDate.now());
-            dag = new StandaardDag(dateProvider,maaltijden,localDate,cal,kol,eiw,vet);
+
+            while (resultSet.next()){
+                LocalDate localDate = resultSet.getDate("datum").toLocalDate();
+                double cal = resultSet.getDouble("caloriedoel");
+                double kol = resultSet.getDouble("koolhydraatdoel");
+                double eiw = resultSet.getDouble("eiwitdoel");
+                double vet = resultSet.getDouble("vetdoel");
+                List<Maaltijd> maaltijden = maaltijdDoa.getMaaltijdenPerDag(LocalDate.now());
+                dag = new StandaardDag(dateProvider,maaltijden,localDate,cal,kol,eiw,vet);
+            }
 
         }
         return dag;

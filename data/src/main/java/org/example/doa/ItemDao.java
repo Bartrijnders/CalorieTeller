@@ -1,6 +1,6 @@
 package org.example.doa;
 
-import org.example.models.Item;
+import main.java.org.example.models.Item;
 
 import java.sql.SQLException;
 import java.util.List;

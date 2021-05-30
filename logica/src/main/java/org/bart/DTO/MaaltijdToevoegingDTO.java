@@ -1,6 +1,6 @@
 package org.bart.DTO;
 
-import org.example.models.Toevoeging;
+import main.java.org.example.models.Toevoeging;
 
 import java.util.UUID;
 

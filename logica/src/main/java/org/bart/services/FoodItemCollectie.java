@@ -3,11 +3,12 @@ package org.bart.services;
 import org.bart.DTO.FoodItemDTO;
 import org.bart.DTO.ItemDTO;
 import org.example.doa.ItemDao;
-import org.example.models.FoodItem;
-import org.example.models.Item;
-import org.example.models.ItemValidator;
+import main.java.org.example.models.FoodItem;
+import main.java.org.example.models.Item;
+import main.java.org.example.models.ItemValidator;
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -17,7 +18,7 @@ public class FoodItemCollectie implements ItemCollectie {
     private ItemValidator itemValidator;
     private ItemDao itemDao;
 
-    public FoodItemCollectie(ItemDao itemDao, ItemValidator itemValidator) {
+    public FoodItemCollectie(ItemDao itemDao, ItemValidator itemValidator) throws SQLException {
         this.itemDao = itemDao;
         items = itemDao.getAllItems();
         this.itemValidator = itemValidator;
@@ -26,7 +27,7 @@ public class FoodItemCollectie implements ItemCollectie {
 
 
     @Override
-    public ItemDTO foodItemAanmaken(@NotNull String naam, double calorieWaarde, double eiwitWaarde, double koolhydraatWaarde, double vetWaarde) throws IllegalArgumentException{
+    public ItemDTO foodItemAanmaken(@NotNull String naam, double calorieWaarde, double eiwitWaarde, double koolhydraatWaarde, double vetWaarde) throws IllegalArgumentException, SQLException {
         if(itemValidator.valideerWaardes(naam, calorieWaarde, vetWaarde, koolhydraatWaarde, eiwitWaarde)){
             Item item = new FoodItem(naam, calorieWaarde, vetWaarde, koolhydraatWaarde, eiwitWaarde);
             itemDao.storeItem(item);
@@ -37,7 +38,7 @@ public class FoodItemCollectie implements ItemCollectie {
     }
 
     @Override
-    public void ItemVerwijderen(UUID id) {
+    public void ItemVerwijderen(UUID id) throws SQLException {
         Item item = itemDao.getItemByID(id);
         itemDao.deleteItem(item);
         this.items = itemDao.getAllItems();

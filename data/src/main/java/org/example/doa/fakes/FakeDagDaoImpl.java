@@ -2,11 +2,12 @@ package org.example.doa.fakes;
 
 import org.example.doa.DagDao;
 import org.example.doa.DagInstellingenDao;
-import org.example.models.Dag;
-import org.example.models.DagInstellingen;
-import org.example.models.DateProvider;
-import org.example.models.StandaardDag;
+import main.java.org.example.models.Dag;
+import main.java.org.example.models.DagInstellingen;
+import main.java.org.example.models.DateProvider;
+import main.java.org.example.models.StandaardDag;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class FakeDagDaoImpl implements DagDao {
     private DateProvider dateProvider;
     private DagInstellingen dagInstellingen;
 
-    public FakeDagDaoImpl(DateProvider dateProvider, DagInstellingenDao dagInstellingenDao) {
+    public FakeDagDaoImpl(DateProvider dateProvider, DagInstellingenDao dagInstellingenDao) throws SQLException {
         this.dagen = new ArrayList<>();
         this.dateProvider = dateProvider;
         this.dagInstellingen = dagInstellingenDao.getInstellingen();

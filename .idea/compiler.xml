@@ -10,6 +10,7 @@
         <module name="ui" />
         <module name="data" />
         <module name="UI" />
+        <module name="domain" />
         <module name="Data" />
         <module name="UI_JavaFX" />
         <module name="Logica" />

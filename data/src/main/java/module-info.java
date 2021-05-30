@@ -1,6 +1,9 @@
 module data{
     requires java.sql;
-    exports org.example.models;
-    exports org.example.doa.fakes to logica;
-    exports org.example.doa to logica;
+    requires domain;
+
+    exports org.example.doa.fakes;
+    exports org.example.dbConncetion;
+    exports org.example.doa.postgres;
+    exports org.example.doa;
 }

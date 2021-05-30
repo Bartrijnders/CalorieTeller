@@ -3,9 +3,9 @@ import org.bart.services.FoodItemCollectie;
 import org.bart.services.ItemCollectie;
 import org.example.doa.ItemDao;
 import org.example.doa.fakes.FakeItemDaoImpl;
-import org.example.models.FoodItem;
-import org.example.models.ItemValidator;
-import org.example.models.ItemValidator100g;
+import main.java.org.example.models.FoodItem;
+import main.java.org.example.models.ItemValidator;
+import main.java.org.example.models.ItemValidator100g;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -13,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyDouble;
@@ -31,11 +33,12 @@ class FoodItemCollectieTest {
     @InjectMocks
     ItemCollectie itemCollectie = new FoodItemCollectie(itemDao,itemValidator);
 
-
+    FoodItemCollectieTest() throws SQLException {
+    }
 
 
     @Test
-    void itShouldFoodItemAanmaken() {
+    void itShouldFoodItemAanmaken() throws SQLException {
         Mockito.when(itemValidator.valideerWaardes(anyString(), anyDouble(),  anyDouble(),  anyDouble(), anyDouble())).thenReturn(true);
         ItemDTO result = itemCollectie.foodItemAanmaken("test", 100, 10, 20 ,30);
         //Then

@@ -4,10 +4,10 @@ import org.example.doa.ItemDao;
 import org.example.doa.MaaltijdDoa;
 import org.example.doa.ToevoegingDao;
 import org.example.doa.fakes.FakeToevoegingDaoImpl;
-import org.example.models.Dag;
-import org.example.models.Item;
-import org.example.models.Maaltijd;
-import org.example.models.Toevoeging;
+import main.java.org.example.models.Dag;
+import main.java.org.example.models.Item;
+import main.java.org.example.models.Maaltijd;
+import main.java.org.example.models.Toevoeging;
 
 import java.sql.SQLException;
 import java.time.LocalDate;

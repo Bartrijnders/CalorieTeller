@@ -15,20 +15,20 @@ public class Iteratie1 {
     private final Scanner scanner;
     private final DagDTO dagDTO;
 
-    public Iteratie1() {
+    public Iteratie1() throws SQLException {
         scanner = new Scanner(System.in);
         container =  new ServiceContainter();
         dagDTO = container.getStandaardDagCollectie().getToday();
     }
 
-    public void start() {
+    public void start() throws SQLException {
         System.out.println(("Welcome bij uw calorie teller!").toUpperCase(Locale.ROOT));
         System.out.println("Het is vandaag: " + container.getStandaardDagCollectie().getToday());
         dagMenu();
 
     }
 
-    private void dagMenu() {
+    private void dagMenu() throws SQLException {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
         System.out.println("hieronder volgen uw maaltijden:");
         printMaaltijden(dagDTO);
@@ -53,7 +53,7 @@ public class Iteratie1 {
         return keuze;
     }
 
-    private MaaltijdDTO maaltijdSelector() {
+    private MaaltijdDTO maaltijdSelector() throws SQLException {
         printMaaltijden(dagDTO);
         System.out.println("kies een maaltijd door het nummer voor de maaltijd in te typen.");
         int keuze = keuzeSelector(container.getStandaardDagCollectie().getToday().getAllMaaltijden().size());
@@ -83,7 +83,7 @@ public class Iteratie1 {
         }
     }
 
-    private void maaltijdToevoegen() {
+    private void maaltijdToevoegen() throws SQLException {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
         System.out.println(("Maaltijd aanmaken!").toUpperCase());
         System.out.println("Vul een naam in:");
@@ -103,11 +103,11 @@ public class Iteratie1 {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        System.out.println("Nieuwe Maaltijd toegevoegd: " + maaltijd.toString());
+        System.out.println("Nieuwe Maaltijd toegevoegd: " + maaltijd);
         dagMenu();
     }
 
-    private void dagKeuze(int keuze) {
+    private void dagKeuze(int keuze) throws SQLException {
         switch (keuze) {
             case 0:
                 maaltijdToevoegen();
@@ -124,7 +124,7 @@ public class Iteratie1 {
         }
     }
 
-    private void nieuwItemToevoegen() {
+    private void nieuwItemToevoegen() throws SQLException {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
         System.out.println("NIEUW PRODUCT TOEVOEGEN.");
         System.out.println("Voer een naam voor het nieuwe Product in.");
@@ -158,7 +158,7 @@ public class Iteratie1 {
         System.out.println("Item: " + item.getNaam() + ", is verwijdert.");
     }
 
-    private void maaltijdKeuzeMenu(int keuze, MaaltijdDTO maaltijd) {
+    private void maaltijdKeuzeMenu(int keuze, MaaltijdDTO maaltijd) throws SQLException {
         switch (keuze) {
             case 0:
                 maaltijdItemToevoegen(maaltijd);
@@ -171,7 +171,7 @@ public class Iteratie1 {
         }
     }
 
-    private void maaltijdItemToevoegen(MaaltijdDTO maaltijd) {
+    private void maaltijdItemToevoegen(MaaltijdDTO maaltijd) throws SQLException {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
         System.out.println("PRODUCT TOEVOEGEN");
         System.out.println("Kies een product uit de onderstaande lijst door het nummer van het product in te voeren.");
@@ -190,7 +190,7 @@ public class Iteratie1 {
         maaltijdKeuzeMenu(maaltijd);
     }
 
-    private void maaltijdBekijken() {
+    private void maaltijdBekijken() throws SQLException {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
         System.out.println(("Maaltijd Bekijken!").toUpperCase());
         System.out.println("selecteer een maaltijd die u wilt Bekijken: ");
@@ -199,7 +199,7 @@ public class Iteratie1 {
         dagMenu();
     }
 
-    private void maaltijdKeuzeMenu(MaaltijdDTO maaltijd) {
+    private void maaltijdKeuzeMenu(MaaltijdDTO maaltijd) throws SQLException {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
         System.out.println("Maaltijd: " + maaltijd.getNaam());
         System.out.println("Calorie: " + maaltijd.getGebruikteCalorieen() + "/" + maaltijd.getCalorieDoel());
@@ -220,23 +220,23 @@ public class Iteratie1 {
 
     }
 
-    private void maaltijdItemVerwijderen(MaaltijdDTO maaltijd) {
+    private void maaltijdItemVerwijderen(MaaltijdDTO maaltijd) throws SQLException {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
         System.out.println(("Item verwijderen!").toUpperCase());
         System.out.println("selecteer een maaltijd die u wilt verwijderen: ");
         ToevoegingDTO toevoeging = toevoegingSelector(maaltijd);
         container.getMaaltijdService().removeItem(maaltijd.getId(),toevoeging.getID(),dagDTO.getDatum());
-        System.out.println("Item verwijdert: " + toevoeging.toString());
+        System.out.println("Item verwijdert: " + toevoeging);
         maaltijdKeuzeMenu(maaltijd);
     }
 
-    private void maaltijdVerwijderen() {
+    private void maaltijdVerwijderen() throws SQLException {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
         System.out.println(("Maaltijd verwijderen!").toUpperCase());
         System.out.println("selecteer een maaltijd die u wilt verwijderen: ");
         MaaltijdDTO maaltijd = maaltijdSelector();
         container.getStandaardDagCollectie().maaltijdVerwijderen(dagDTO.getDatum(),maaltijd.getId());
-        System.out.println("Maaltijd verwijdert: " + maaltijd.toString());
+        System.out.println("Maaltijd verwijdert: " + maaltijd);
         dagMenu();
 
     }

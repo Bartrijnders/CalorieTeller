@@ -1,7 +1,7 @@
 package org.example.doa;
 
-import org.example.models.Dag;
-import org.example.models.Maaltijd;
+import main.java.org.example.models.Dag;
+import main.java.org.example.models.Maaltijd;
 
 import java.sql.SQLException;
 import java.time.LocalDate;

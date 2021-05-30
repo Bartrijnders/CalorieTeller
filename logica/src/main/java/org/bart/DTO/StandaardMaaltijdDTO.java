@@ -1,7 +1,7 @@
 package org.bart.DTO;
 
-import org.example.models.Maaltijd;
-import org.example.models.Toevoeging;
+import main.java.org.example.models.Maaltijd;
+import main.java.org.example.models.Toevoeging;
 
 import java.util.ArrayList;
 import java.util.List;

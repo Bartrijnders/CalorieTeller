@@ -1,4 +1,4 @@
-import org.example.models.*;
+import main.java.org.example.models.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

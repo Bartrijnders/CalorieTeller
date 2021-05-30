@@ -13,6 +13,7 @@
         <module>logica</module>
         <module>ui</module>
         <module>UI_JavaFX</module>
+        <module>domain</module>
     </modules>
     <dependencies>
         <dependency>

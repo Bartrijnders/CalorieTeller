@@ -1,7 +1,7 @@
 package org.bart.DTO;
 
-import org.example.models.DagInstellingen;
-import org.example.models.Maaltijd;
+import main.java.org.example.models.DagInstellingen;
+import main.java.org.example.models.Maaltijd;
 
 import java.util.ArrayList;
 import java.util.List;

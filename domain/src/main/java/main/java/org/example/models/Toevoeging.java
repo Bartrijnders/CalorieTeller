@@ -1,4 +1,4 @@
-package org.example.models;
+package main.java.org.example.models;
 
 public interface Toevoeging extends IDAble {
     Item getItem();

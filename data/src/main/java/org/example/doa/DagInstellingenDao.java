@@ -1,6 +1,6 @@
 package org.example.doa;
 
-import org.example.models.DagInstellingen;
+import main.java.org.example.models.DagInstellingen;
 
 import java.sql.SQLException;
 

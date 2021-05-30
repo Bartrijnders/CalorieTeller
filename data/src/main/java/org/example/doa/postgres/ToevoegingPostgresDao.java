@@ -3,10 +3,10 @@ package org.example.doa.postgres;
 import org.example.dbConncetion.DBconnection;
 import org.example.doa.ItemDao;
 import org.example.doa.ToevoegingDao;
-import org.example.models.Item;
-import org.example.models.Maaltijd;
-import org.example.models.MaaltijdToevoeging;
-import org.example.models.Toevoeging;
+import main.java.org.example.models.Item;
+import main.java.org.example.models.Maaltijd;
+import main.java.org.example.models.MaaltijdToevoeging;
+import main.java.org.example.models.Toevoeging;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

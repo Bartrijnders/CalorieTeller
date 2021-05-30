@@ -2,8 +2,8 @@ package org.example.doa.postgres;
 
 import org.example.dbConncetion.DBconnection;
 import org.example.doa.ItemDao;
-import org.example.models.FoodItem;
-import org.example.models.Item;
+import main.java.org.example.models.FoodItem;
+import main.java.org.example.models.Item;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

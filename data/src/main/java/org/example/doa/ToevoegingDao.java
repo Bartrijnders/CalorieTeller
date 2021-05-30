@@ -1,7 +1,7 @@
 package org.example.doa;
 
-import org.example.models.Maaltijd;
-import org.example.models.Toevoeging;
+import main.java.org.example.models.Maaltijd;
+import main.java.org.example.models.Toevoeging;
 
 import java.sql.SQLException;
 import java.util.List;

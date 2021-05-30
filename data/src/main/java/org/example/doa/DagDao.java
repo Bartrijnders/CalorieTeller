@@ -1,6 +1,6 @@
 package org.example.doa;
 
-import org.example.models.Dag;
+import main.java.org.example.models.Dag;
 
 import java.sql.SQLException;
 import java.time.LocalDate;

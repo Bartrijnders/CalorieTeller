@@ -1,6 +1,6 @@
 package org.bart.DTO;
 
-import org.example.models.Item;
+import main.java.org.example.models.Item;
 
 import java.util.UUID;
 

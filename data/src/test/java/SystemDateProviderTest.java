@@ -1,5 +1,5 @@
-import org.example.models.DateProvider;
-import org.example.models.SystemDateProvider;
+import main.java.org.example.models.DateProvider;
+import main.java.org.example.models.SystemDateProvider;
 import org.junit.jupiter.api.Test;
 
 import java.time.Clock;

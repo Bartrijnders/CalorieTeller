@@ -2,6 +2,7 @@ module logica {
     requires data;
     requires annotations;
     requires java.sql;
-    exports org.bart.DTO;
+    requires domain;
     exports org.bart.services;
+    exports org.bart.DTO;
 }

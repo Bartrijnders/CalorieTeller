@@ -1,6 +1,6 @@
 package org.bart.DTO;
 
-import org.example.models.Dag;
+import main.java.org.example.models.Dag;
 
 import java.time.LocalDate;
 import java.util.List;

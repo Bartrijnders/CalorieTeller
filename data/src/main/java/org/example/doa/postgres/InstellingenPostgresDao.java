@@ -1,5 +1,6 @@
 package org.example.doa.postgres;
 
+import main.java.org.example.models.Maaltijd;
 import org.example.dbConncetion.DBconnection;
 import org.example.doa.DagInstellingenDao;
 import org.example.doa.InstellingMaaltijdDao;
@@ -10,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.UUID;
 
 public class InstellingenPostgresDao implements DagInstellingenDao {

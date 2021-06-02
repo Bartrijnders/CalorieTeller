@@ -14,6 +14,7 @@
         <module>ui</module>
         <module>UI_JavaFX</module>
         <module>domain</module>
+        <module>javafx</module>
     </modules>
     <dependencies>
         <dependency>

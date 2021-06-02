@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!--<VBox prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">-->
+<!--   -->
+<!--</VBox>-->
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" style="-fx-border-color: #98FB98;" type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane style="-fx-background-color: #98FB98;">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="300.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="maaltijdNameLbl" text="Label" GridPane.columnIndex="2">
+               <font>
+                  <Font name="Helvetica Bold" size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <Button fx:id="deleteBtn" mnemonicParsing="false" style="-fx-background-color: red;" text="X" textFill="WHITE" GridPane.columnIndex="4">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="editBtn" layoutX="557.0" layoutY="12.0" mnemonicParsing="false" text="Edit" GridPane.columnIndex="3">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="addBtn" layoutX="557.0" layoutY="12.0" mnemonicParsing="false" text="+" GridPane.columnIndex="1">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </GridPane>
+      <GridPane style="-fx-border-color: #98FB98;">
+        <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Calorieen:">
+               <font>
+                  <Font name="Helvetica Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label text="koolhydraten:" GridPane.columnIndex="1">
+               <font>
+                  <Font name="Helvetica Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label text="Eiwitten:" GridPane.columnIndex="2">
+               <font>
+                  <Font name="Helvetica Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label text="Vetten:" GridPane.columnIndex="3">
+               <font>
+                  <Font name="Helvetica Bold" size="13.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <children>
+                  <Label fx:id="usedCalLbl" text="Label" />
+                  <Label text="/" />
+                  <Label fx:id="goalCalLbl" text="goalCalLbl" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <Label fx:id="usedKolLbl" text="Label" />
+                  <Label text="/" />
+                  <Label fx:id="goalKolLbl" text="Label" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <Label fx:id="usedEiwLbl" text="Label" />
+                  <Label text="/" />
+                  <Label fx:id="goalEiwLbl" text="Label" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <children>
+                  <Label fx:id="usedVetLbl" text="Label" />
+                  <Label text="/" />
+                  <Label fx:id="goalVetLbl" text="Label" />
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
+      <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
+         <content>
+            <VBox fx:id="toevoegingVbox" />
+         </content>
+      </ScrollPane>
+   </children>
+</fx:root>

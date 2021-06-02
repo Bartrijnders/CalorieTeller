@@ -12,9 +12,12 @@
         <module name="UI" />
         <module name="domain" />
         <module name="Data" />
-        <module name="UI_JavaFX" />
+        <module name="javafx" />
         <module name="Logica" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="UI_JavaFX" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

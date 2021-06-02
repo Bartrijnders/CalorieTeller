@@ -1,4 +1,4 @@
-import org.bart.DTO.ItemDTO;
+import main.java.org.example.models.Item;
 import org.bart.services.FoodItemCollectie;
 import org.bart.services.ItemCollectie;
 import org.example.doa.ItemDao;
@@ -40,7 +40,7 @@ class FoodItemCollectieTest {
     @Test
     void itShouldFoodItemAanmaken() throws SQLException {
         Mockito.when(itemValidator.valideerWaardes(anyString(), anyDouble(),  anyDouble(),  anyDouble(), anyDouble())).thenReturn(true);
-        ItemDTO result = itemCollectie.foodItemAanmaken("test", 100, 10, 20 ,30);
+        Item result = itemCollectie.foodItemAanmaken("test", 100, 10, 20 ,30);
         //Then
         assertTrue(result instanceof FoodItem);
 

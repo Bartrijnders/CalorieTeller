@@ -95,9 +95,10 @@ public class StandaardMaaltijd implements Maaltijd {
 
     // misschien is het slim om een interface hievoor aan te maken.
     @Override
-    public void addFoodItem(Item item, double hoeveelheidInGram){
+    public Toevoeging addFoodItem(Item item, double hoeveelheidInGram){
         Toevoeging toevoeging = new MaaltijdToevoeging(hoeveelheidInGram, item);
         this.toevoegingen.add(toevoeging);
+        return toevoeging;
     }
 
     @Override
@@ -115,7 +116,7 @@ public class StandaardMaaltijd implements Maaltijd {
 
     @Override
     public double getGebruikteCalorieen() {
-        int toReturn = 0;
+        double toReturn = 0;
         for (Toevoeging toevoeging : toevoegingen) {
             toReturn += toevoeging.getCalorieWaarde();
         }
@@ -124,7 +125,7 @@ public class StandaardMaaltijd implements Maaltijd {
 
     @Override
     public double getGebruikteKoolhydraten() {
-        int toReturn = 0;
+        double toReturn = 0;
         for (Toevoeging toevoeging : toevoegingen) {
             toReturn += toevoeging.getKoolhydraatWaarde();
         }
@@ -133,7 +134,7 @@ public class StandaardMaaltijd implements Maaltijd {
 
     @Override
     public double getGebruikteEiwitten() {
-        int toReturn = 0;
+        double toReturn = 0;
         for (Toevoeging toevoeging : toevoegingen) {
             toReturn += toevoeging.getEiwitWaarde();
         }
@@ -142,7 +143,7 @@ public class StandaardMaaltijd implements Maaltijd {
 
     @Override
     public double getGebruikteVetten() {
-        int toReturn = 0;
+        double toReturn = 0;
         for (Toevoeging toevoeging : toevoegingen) {
             toReturn += toevoeging.getVetWaarde();
         }

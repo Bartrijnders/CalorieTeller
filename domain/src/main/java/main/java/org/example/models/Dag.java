@@ -27,4 +27,12 @@ public interface Dag {
     List<Maaltijd> getMaaltijden();
 
     LocalDate getDatum();
+
+    double getUsedKoolhydraten();
+
+    double getUsedCalorieen();
+
+    double getUsedVetten();
+
+    double getUsedEiwitten();
 }

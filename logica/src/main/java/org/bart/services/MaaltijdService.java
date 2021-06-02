@@ -20,25 +20,23 @@ public class MaaltijdService {
     private final ItemDao itemDao;
     private final ToevoegingDao toevoegingDao;
 
-    public MaaltijdService(MaaltijdDoa maaltijdDoa, ItemDao itemDao) {
+    public MaaltijdService(MaaltijdDoa maaltijdDoa, ItemDao itemDao, ToevoegingDao toevoegingDao) {
         this.maaltijdDoa = maaltijdDoa;
         this.itemDao = itemDao;
-        this.toevoegingDao = new FakeToevoegingDaoImpl();
+        this.toevoegingDao = toevoegingDao;
     }
 
     public List<Maaltijd> maaltijdenVanDagOphalen(Dag dag) throws SQLException {
         return maaltijdDoa.getMaaltijdenPerDag(dag.getDatum());
     }
 
-    public void addItem(UUID maaltijdId, UUID itemId, LocalDate date, double hoeveelheidInGram) throws SQLException {
-        Item item = itemDao.getItemByID(itemId);
-        Maaltijd maaltijd = maaltijdDoa.getMaaltijd(maaltijdId,date);
-        maaltijd.addFoodItem(item, hoeveelheidInGram);
+    public void addItem(Maaltijd maaltijd, Item item, double hoeveelheidInGram) throws SQLException {
+        Toevoeging toevoeging = maaltijd.addFoodItem(item, hoeveelheidInGram);
+        toevoegingDao.storeToevoeging(toevoeging, maaltijd);
     }
 
-    public void removeItem(UUID maaltijdId, UUID toevoegingsId, LocalDate date) throws SQLException {
-        Maaltijd maaltijd = maaltijdDoa.getMaaltijd(maaltijdId,date);
-        Toevoeging toevoeging = toevoegingDao.getByID(toevoegingsId, maaltijd);
+    public void removeItem(Maaltijd maaltijd, Toevoeging toevoeging) throws SQLException {
+        maaltijd.verwijderItem(toevoeging);
         toevoegingDao.deleteToevoeging(toevoeging, maaltijd);
 
     }

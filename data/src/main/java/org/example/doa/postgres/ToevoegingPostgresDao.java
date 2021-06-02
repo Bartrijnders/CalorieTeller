@@ -77,7 +77,7 @@ public class ToevoegingPostgresDao implements ToevoegingDao {
         try(Connection conn = dBconnection.connect();
             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
 
-            preparedStatement.setObject(1, toevoeging.getID());
+            preparedStatement.setObject(1, toevoeging.getID().toString());
             preparedStatement.executeUpdate();
 
         } catch (SQLException throwables) {

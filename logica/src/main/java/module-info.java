@@ -4,5 +4,4 @@ module logica {
     requires java.sql;
     requires domain;
     exports org.bart.services;
-    exports org.bart.DTO;
 }

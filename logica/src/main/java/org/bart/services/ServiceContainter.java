@@ -3,10 +3,6 @@ package org.bart.services;
 import org.example.dbConncetion.DBconnection;
 import org.example.dbConncetion.PostgresCon;
 import org.example.doa.*;
-import org.example.doa.fakes.FakeDagDaoImpl;
-import org.example.doa.fakes.FakeDagInstellingenImpl;
-import org.example.doa.fakes.FakeItemDaoImpl;
-import org.example.doa.fakes.FakeMaaltijdDaoImpl;
 import main.java.org.example.models.DateProvider;
 import main.java.org.example.models.ItemValidator;
 import main.java.org.example.models.ItemValidator100g;
@@ -20,7 +16,7 @@ public class ServiceContainter {
 
     private final ItemCollectie foodItemCollectie;
     private final MaaltijdService maaltijdService;
-    private final StandaardDagCollectie standaardDagCollectie;
+    private final StandaardDagService standaardDagService;
     private final ItemDao itemDao;
     private final ItemValidator itemValidator;
     private final MaaltijdDoa maaltijdDoa;
@@ -36,17 +32,14 @@ public class ServiceContainter {
         itemDao = new ItemPostgresDao(dBconnection);
         itemValidator = new ItemValidator100g();
         foodItemCollectie = new FoodItemCollectie(itemDao, itemValidator);
-
-
-
         toevoegingDao = new ToevoegingPostgresDao(dBconnection, itemDao);
         maaltijdDoa = new MaaltijdPostgresDao(dBconnection, toevoegingDao);
         instellingMaaltijdDao = (InstellingMaaltijdDao) maaltijdDoa;
         dagInstellingenDao = new InstellingenPostgresDao(dBconnection, instellingMaaltijdDao);
         dateProvider = new SystemDateProvider(Clock.systemDefaultZone());
         dagDao = new DagPostgresDao(dBconnection, maaltijdDoa, dateProvider);
-        maaltijdService = new MaaltijdService(maaltijdDoa, itemDao);
-        standaardDagCollectie = new StandaardDagCollectie(dagDao, maaltijdDoa);
+        maaltijdService = new MaaltijdService(maaltijdDoa, itemDao, toevoegingDao);
+        standaardDagService = new StandaardDagService(dagDao, maaltijdDoa,dateProvider,dagInstellingenDao);
     }
 
     public ItemCollectie getFoodItemCollectie() {
@@ -57,8 +50,8 @@ public class ServiceContainter {
         return maaltijdService;
     }
 
-    public StandaardDagCollectie getStandaardDagCollectie() {
-        return standaardDagCollectie;
+    public StandaardDagService getStandaardDagCollectie() {
+        return standaardDagService;
     }
 
     public ItemDao getItemDoa() {

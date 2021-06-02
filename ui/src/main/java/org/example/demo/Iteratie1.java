@@ -1,9 +1,6 @@
 package org.example.demo;
 
-import org.bart.DTO.DagDTO;
-import org.bart.DTO.ItemDTO;
-import org.bart.DTO.MaaltijdDTO;
-import org.bart.DTO.ToevoegingDTO;
+import main.java.org.example.models.*;
 import org.bart.services.ServiceContainter;
 
 import java.sql.SQLException;
@@ -13,12 +10,12 @@ import java.util.Scanner;
 public class Iteratie1 {
     private final ServiceContainter container;
     private final Scanner scanner;
-    private final DagDTO dagDTO;
+    private final Dag dag;
 
     public Iteratie1() throws SQLException {
         scanner = new Scanner(System.in);
         container =  new ServiceContainter();
-        dagDTO = container.getStandaardDagCollectie().getToday();
+        dag = container.getStandaardDagCollectie().getToday();
     }
 
     public void start() throws SQLException {
@@ -31,7 +28,7 @@ public class Iteratie1 {
     private void dagMenu() throws SQLException {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
         System.out.println("hieronder volgen uw maaltijden:");
-        printMaaltijden(dagDTO);
+        printMaaltijden(dag);
         System.out.println();
         System.out.println("wat wilt u doen?");
         System.out.println("Type 0 voor: Maaltijd Toevoegen, Typ 1 voor: Maaltijd Verwijderen, Type 2 voor: Maaltijd Selecteren, Type 3 voor: Nieuw Product toevoegen, Type 4 voor: Product Verwijderen");
@@ -53,31 +50,31 @@ public class Iteratie1 {
         return keuze;
     }
 
-    private MaaltijdDTO maaltijdSelector() throws SQLException {
-        printMaaltijden(dagDTO);
+    private Maaltijd maaltijdSelector() throws SQLException {
+        printMaaltijden(dag);
         System.out.println("kies een maaltijd door het nummer voor de maaltijd in te typen.");
-        int keuze = keuzeSelector(container.getStandaardDagCollectie().getToday().getAllMaaltijden().size());
-        return container.getStandaardDagCollectie().getToday().getAllMaaltijden().get(keuze);
+        int keuze = keuzeSelector(container.getStandaardDagCollectie().getToday().getMaaltijden().size());
+        return container.getStandaardDagCollectie().getToday().getMaaltijden().get(keuze);
     }
 
-    private ToevoegingDTO toevoegingSelector(MaaltijdDTO maaltijd) {
+    private Toevoeging toevoegingSelector(Maaltijd maaltijd) {
         printToevoegingen(maaltijd);
         System.out.println("kies een maaltijd door het nummer voor de maaltijd in te typen.");
         int keuze = keuzeSelector(maaltijd.getToevoegingen().size() - 1);
         return maaltijd.getToevoegingen().get(keuze);
     }
 
-    private void printToevoegingen(MaaltijdDTO maaltijd) {
+    private void printToevoegingen(Maaltijd maaltijd) {
         int i = 0;
-        for (ToevoegingDTO toevoeging : maaltijd.getToevoegingen()) {
+        for (Toevoeging toevoeging : maaltijd.getToevoegingen()) {
             System.out.println(i + ": " + toevoeging.toString());
             i++;
         }
     }
 
-    private void printMaaltijden(DagDTO dagDTO) {
+    private void printMaaltijden(Dag dag) {
         int i = 0;
-        for (MaaltijdDTO maaltijd : dagDTO.getAllMaaltijden()) {
+        for (Maaltijd maaltijd : dag.getMaaltijden()) {
             System.out.println(i + ": " + maaltijd.toString());
             i++;
         }
@@ -97,9 +94,9 @@ public class Iteratie1 {
         double eiwit = scanner.nextDouble();
         System.out.println("Vul een vet doel in: ");
         double vet = scanner.nextDouble();
-        MaaltijdDTO maaltijd = null;
+        Maaltijd maaltijd = null;
         try {
-            maaltijd = container.getStandaardDagCollectie().maaltijdAanDagToevoegen(dagDTO.getDatum(),naam, calorie, koolhydraat, eiwit, vet);
+            maaltijd = container.getStandaardDagCollectie().maaltijdAanDagToevoegen(naam, calorie, koolhydraat, eiwit, vet, dag);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -138,27 +135,28 @@ public class Iteratie1 {
         double eiwit = scanner.nextDouble();
         System.out.println("Hoeveel vet bevat " + naam + " per 100 gram?");
         double vet = scanner.nextDouble();
-        ItemDTO item = container.getFoodItemCollectie().foodItemAanmaken(naam, calorie,eiwit,koolhydraat, vet);
+        Item item = container.getFoodItemCollectie().foodItemAanmaken(naam, calorie,eiwit,koolhydraat, vet);
         System.out.println("Nieuw product is toegevoegd!");
         System.out.println(item.toString());
         dagMenu();
     }
 
-    private void itemVerwijderen() {
+    private void itemVerwijderen() throws SQLException {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
         System.out.println("PRODUCT VERWIJDEREN.");
         System.out.println("kies een product uit de lijst hieronder om te verwijderen. typ het nummer van het product in.");
         int i = 0;
-        for (ItemDTO item : container.getFoodItemCollectie().getItems()) {
+        for (Item item : container.getFoodItemCollectie().getItems()) {
             System.out.println(i + ": " + item.toString());
             i++;
         }
         int keuze = keuzeSelector(container.getFoodItemCollectie().getItems().size() - 1);
-        ItemDTO item = container.getFoodItemCollectie().getItems().remove(keuze);
+        Item item = container.getFoodItemCollectie().getItems().get(keuze);
+        container.getFoodItemCollectie().ItemVerwijderen(item);
         System.out.println("Item: " + item.getNaam() + ", is verwijdert.");
     }
 
-    private void maaltijdKeuzeMenu(int keuze, MaaltijdDTO maaltijd) throws SQLException {
+    private void maaltijdKeuzeMenu(int keuze, Maaltijd maaltijd) throws SQLException {
         switch (keuze) {
             case 0:
                 maaltijdItemToevoegen(maaltijd);
@@ -171,21 +169,21 @@ public class Iteratie1 {
         }
     }
 
-    private void maaltijdItemToevoegen(MaaltijdDTO maaltijd) throws SQLException {
+    private void maaltijdItemToevoegen(Maaltijd maaltijd) throws SQLException {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
         System.out.println("PRODUCT TOEVOEGEN");
         System.out.println("Kies een product uit de onderstaande lijst door het nummer van het product in te voeren.");
         int i = 0;
-        for (ItemDTO item : container.getFoodItemCollectie().getItems()) {
+        for (Item item : container.getFoodItemCollectie().getItems()) {
             System.out.println(i + ": " + item.toString());
             i++;
         }
         int keuze = keuzeSelector(container.getFoodItemCollectie().getItems().size() - 1);
-        ItemDTO itemKeuze = container.getFoodItemCollectie().getItems().get(keuze);
+        Item itemKeuze = container.getFoodItemCollectie().getItems().get(keuze);
         System.out.println("U heeft gekozen voor: " + itemKeuze);
         System.out.println("Vul hieronder de hoeveelheid die u wilt toevoegen van dit product in gram.");
         double hoeveelheid = scanner.nextDouble();
-        container.getMaaltijdService().addItem(maaltijd.getId(),itemKeuze.getId(),dagDTO.getDatum(),hoeveelheid);
+        container.getMaaltijdService().addItem(maaltijd,itemKeuze,hoeveelheid);
         System.out.println("Item Toegevoegd!");
         maaltijdKeuzeMenu(maaltijd);
     }
@@ -194,23 +192,23 @@ public class Iteratie1 {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
         System.out.println(("Maaltijd Bekijken!").toUpperCase());
         System.out.println("selecteer een maaltijd die u wilt Bekijken: ");
-        MaaltijdDTO maaltijd = maaltijdSelector();
+        Maaltijd maaltijd = maaltijdSelector();
         maaltijdKeuzeMenu(maaltijd);
         dagMenu();
     }
 
-    private void maaltijdKeuzeMenu(MaaltijdDTO maaltijd) throws SQLException {
+    private void maaltijdKeuzeMenu(Maaltijd maaltijd) throws SQLException {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
         System.out.println("Maaltijd: " + maaltijd.getNaam());
         System.out.println("Calorie: " + maaltijd.getGebruikteCalorieen() + "/" + maaltijd.getCalorieDoel());
-        System.out.println("Koolhydraat: " + maaltijd.getGebruikteKoolhydraat() + "/" + maaltijd.getKoolhydraatDoel());
-        System.out.println("Eiwit: " + maaltijd.getGebruikteEiwit() + "/" + maaltijd.getEiwitDoel());
-        System.out.println("Vet: " + maaltijd.getGebruikteEiwit() + "/" + maaltijd.getVetDoel());
+        System.out.println("Koolhydraat: " + maaltijd.getGebruikteKoolhydraten() + "/" + maaltijd.getKoolhydraatDoel());
+        System.out.println("Eiwit: " + maaltijd.getGebruikteEiwitten() + "/" + maaltijd.getEiwitDoel());
+        System.out.println("Vet: " + maaltijd.getGebruikteVetten() + "/" + maaltijd.getVetDoel());
         System.out.println("Items in deze maaltijd: ");
         if (maaltijd.getToevoegingen().isEmpty()) {
             System.out.println("Deze maaltijd bevat nog geen items.");
         } else {
-            for (ToevoegingDTO toevoeging : maaltijd.getToevoegingen()) {
+            for (Toevoeging toevoeging : maaltijd.getToevoegingen()) {
                 System.out.println(toevoeging.toString());
             }
         }
@@ -220,12 +218,12 @@ public class Iteratie1 {
 
     }
 
-    private void maaltijdItemVerwijderen(MaaltijdDTO maaltijd) throws SQLException {
+    private void maaltijdItemVerwijderen(Maaltijd maaltijd) throws SQLException {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
         System.out.println(("Item verwijderen!").toUpperCase());
         System.out.println("selecteer een maaltijd die u wilt verwijderen: ");
-        ToevoegingDTO toevoeging = toevoegingSelector(maaltijd);
-        container.getMaaltijdService().removeItem(maaltijd.getId(),toevoeging.getID(),dagDTO.getDatum());
+        Toevoeging toevoeging = toevoegingSelector(maaltijd);
+        container.getMaaltijdService().removeItem(maaltijd,toevoeging);
         System.out.println("Item verwijdert: " + toevoeging);
         maaltijdKeuzeMenu(maaltijd);
     }
@@ -234,8 +232,8 @@ public class Iteratie1 {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
         System.out.println(("Maaltijd verwijderen!").toUpperCase());
         System.out.println("selecteer een maaltijd die u wilt verwijderen: ");
-        MaaltijdDTO maaltijd = maaltijdSelector();
-        container.getStandaardDagCollectie().maaltijdVerwijderen(dagDTO.getDatum(),maaltijd.getId());
+        Maaltijd maaltijd = maaltijdSelector();
+        container.getStandaardDagCollectie().maaltijdVerwijderen(dag ,maaltijd);
         System.out.println("Maaltijd verwijdert: " + maaltijd);
         dagMenu();
 

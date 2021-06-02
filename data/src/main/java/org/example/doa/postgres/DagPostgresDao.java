@@ -80,6 +80,8 @@ public class DagPostgresDao implements DagDao {
             preparedStatement.setDate(1, Date.valueOf(date));
 
             ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
                 LocalDate localDate = resultSet.getDate("datum").toLocalDate();
                 double cal = resultSet.getDouble("caloriedoel");
                 double kol = resultSet.getDouble("koolhydraatdoel");
@@ -87,7 +89,7 @@ public class DagPostgresDao implements DagDao {
                 double vet = resultSet.getDouble("vetdoel");
                 List<Maaltijd> maaltijden = maaltijdDoa.getMaaltijdenPerDag(date);
                 dag = new StandaardDag(dateProvider,maaltijden,localDate,cal,kol,eiw,vet);
-
+            }
         }
         return dag;
     }

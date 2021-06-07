@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface InstellingMaaltijdDao {
     List<Maaltijd> getInstellingsMaaltijden(DagInstellingen dagInstellingen) throws SQLException;
+    void verwijderInstellingMaaltijd(DagInstellingen dagInstellingen, Maaltijd maaltijd) throws SQLException;
 }

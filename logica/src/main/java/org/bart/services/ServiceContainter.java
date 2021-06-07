@@ -26,6 +26,7 @@ public class ServiceContainter {
     private final DBconnection dBconnection;
     private final ToevoegingDao toevoegingDao;
     private final InstellingMaaltijdDao instellingMaaltijdDao;
+    private final InstellingenService instellingenService;
 
     public ServiceContainter() throws SQLException {
         dBconnection = new PostgresCon();
@@ -35,11 +36,12 @@ public class ServiceContainter {
         toevoegingDao = new ToevoegingPostgresDao(dBconnection, itemDao);
         maaltijdDoa = new MaaltijdPostgresDao(dBconnection, toevoegingDao);
         instellingMaaltijdDao = (InstellingMaaltijdDao) maaltijdDoa;
-        dagInstellingenDao = new InstellingenPostgresDao(dBconnection, instellingMaaltijdDao);
         dateProvider = new SystemDateProvider(Clock.systemDefaultZone());
         dagDao = new DagPostgresDao(dBconnection, maaltijdDoa, dateProvider);
         maaltijdService = new MaaltijdService(maaltijdDoa, itemDao, toevoegingDao);
-        standaardDagService = new StandaardDagService(dagDao, maaltijdDoa,dateProvider,dagInstellingenDao);
+        dagInstellingenDao = new InstellingenPostgresDao(dBconnection, instellingMaaltijdDao);
+        instellingenService = new InstellingenService(dagInstellingenDao, instellingMaaltijdDao);
+        standaardDagService = new StandaardDagService(dagDao, maaltijdDoa,dateProvider,instellingenService);
     }
 
     public ItemCollectie getFoodItemCollectie() {
@@ -70,8 +72,8 @@ public class ServiceContainter {
         return dagDao;
     }
 
-    public DagInstellingenDao getDagInstellingenDao() {
-        return dagInstellingenDao;
+    public InstellingenService getInstellingenService() {
+        return instellingenService;
     }
 
     public DateProvider getDateProvider() {

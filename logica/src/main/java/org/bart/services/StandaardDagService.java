@@ -16,20 +16,20 @@ public class StandaardDagService {
     private DagDao dagDao;
     private MaaltijdDoa maaltijdDoa;
     private DateProvider dateProvider;
-    private DagInstellingenDao dagInstellingenDao;
+    private InstellingenService instellingenService;
 
-    public StandaardDagService(DagDao dagDao, MaaltijdDoa maaltijdDoa, DateProvider dateProvider, DagInstellingenDao dagInstellingenDao) throws SQLException {
+    public StandaardDagService(DagDao dagDao, MaaltijdDoa maaltijdDoa, DateProvider dateProvider, InstellingenService instellingenService ) throws SQLException {
         this.dagDao = dagDao;
         this.dagen = dagDao.getAllDagen();
         this.maaltijdDoa = maaltijdDoa;
         this.dateProvider = dateProvider;
-        this.dagInstellingenDao = dagInstellingenDao;
+        this.instellingenService = instellingenService;
     }
 
     public Dag getToday() throws SQLException {
         Dag dag = dagDao.getToday();
         if(dag == null){
-            DagInstellingen dagInstellingen = dagInstellingenDao.getInstellingen();
+            DagInstellingen dagInstellingen = instellingenService.getInstellingen();
             dag = new StandaardDag(dateProvider, dagInstellingen);
             dagDao.storeDag(dag);
         }

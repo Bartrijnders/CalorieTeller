@@ -113,7 +113,7 @@
             </HBox>
          </children>
       </GridPane>
-      <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefWidth="200.0">
          <content>
             <VBox fx:id="toevoegingVbox" />
          </content>

@@ -73,12 +73,7 @@ public class MaaltijdPostgresDao implements MaaltijdDoa , InstellingMaaltijdDao 
         try(Connection connection = dBconnection.connect();
             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
 
-            preparedStatement.setObject(1, maaltijd.getId());
-            preparedStatement.setString(2, maaltijd.getNaam());
-            preparedStatement.setDouble(3, maaltijd.getCalorieDoel());
-            preparedStatement.setDouble(4, maaltijd.getKoolhydraatDoel());
-            preparedStatement.setDouble(5, maaltijd.getEiwitDoel());
-            preparedStatement.setDouble(6, maaltijd.getVetDoel());
+            InstellingenPostgresDao.fillPrepStatement(maaltijd, preparedStatement);
             preparedStatement.setDate(7, Date.valueOf(dag.getDatum()));
             preparedStatement.executeUpdate();
         }
@@ -154,5 +149,17 @@ public class MaaltijdPostgresDao implements MaaltijdDoa , InstellingMaaltijdDao 
 
         }
         return maaltijden;
+    }
+
+    @Override
+    public void verwijderInstellingMaaltijd(DagInstellingen dagInstellingen, Maaltijd maaltijd) throws SQLException {
+        String sql = "DELETE FROM maaltijd WHERE daginstellingenid::text = ? AND id::text = ?";
+
+        try(Connection connection = dBconnection.connect();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setString(1, dagInstellingen.getId().toString());
+            preparedStatement.setString(2, maaltijd.getId().toString());
+            preparedStatement.executeUpdate();
+        }
     }
 }

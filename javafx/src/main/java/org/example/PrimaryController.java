@@ -6,22 +6,17 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import main.java.org.example.models.Dag;
 import main.java.org.example.models.Maaltijd;
 import org.bart.services.ServiceContainter;
 
-public class PrimaryController implements Initializable {
+public class PrimaryController implements Controller {
 
-    @FXML ScrollPane maaltijdenScrPn;
     @FXML Button maaltijdToevoegenBtn;
     @FXML Label datumLbl;
     @FXML Label goalCalLbl;
@@ -57,25 +52,32 @@ public class PrimaryController implements Initializable {
 
         refresh();
 
-        maaltijdToevoegenBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                try {
-                    App.setRoot("maaltijdAanmakenPage", new MaaltijdAanmakenController(dag,serviceContainter, alertController));
-                } catch (IOException | SQLException e) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText(e.getMessage());
-                    alert.show();
-                }
+        maaltijdToevoegenBtn.setOnAction(actionEvent -> {
+            try {
+                App.setRoot("maaltijdAanmakenPage", new DagMaaltijdAanmakenController(dag,serviceContainter, alertController));
+            } catch (IOException e) {
+                alertController.ioExeptionAlert(e);
+            } catch (SQLException e){
+                alertController.sQLExeptionAlert(e);
+            }
+        });
+        instellingenBtn.setOnAction(actionEvent -> {
+            try {
+                App.setRoot("instellingenPage", new InstellingenPageController(serviceContainter, alertController));
+            } catch (IOException e) {
+                alertController.ioExeptionAlert(e);
+            } catch (SQLException e) {
+                alertController.sQLExeptionAlert(e);
             }
         });
 
     }
 
-    public Dag getDag() {
+        public Dag getDag() {
         return dag;
     }
 
+    @Override
     public void refresh() {
         scrPnVBox.getChildren().remove(0,scrPnVBox.getChildren().size());
         datumLbl.setText(dag.getDatum().toString());
@@ -90,7 +92,7 @@ public class PrimaryController implements Initializable {
         usedVetLbl.setText(decimalFormat.format(dag.getUsedVetten()));
 
         for(Maaltijd maaltijd : dag.getMaaltijden()){
-            MaaltijdComponent maaltijdComponent = new MaaltijdComponent(maaltijd, serviceContainter, alertController, this);
+            MaaltijdComponent maaltijdComponent = new StandaardMaaltijdComponent(maaltijd, serviceContainter, alertController, this);
             scrPnVBox.getChildren().add(maaltijdComponent);
         }
     }

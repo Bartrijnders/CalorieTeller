@@ -1,7 +1,5 @@
 package org.example;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,10 +7,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import main.java.org.example.models.Maaltijd;
 import main.java.org.example.models.Toevoeging;
 import org.bart.services.ServiceContainter;
-import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,7 +21,7 @@ public class ToevoegingsComponent extends VBox implements Initializable {
 
     private Toevoeging toevoeging;
     private ServiceContainter serviceContainter;
-    private MaaltijdComponent maaltijdComponent;
+    private StandaardMaaltijdComponent maaltijdComponent;
     @FXML Label itemNameLbl;
     @FXML Label calValueLbl;
     @FXML Label kolValueLbl;
@@ -33,10 +29,11 @@ public class ToevoegingsComponent extends VBox implements Initializable {
     @FXML Label vetValueLbl;
     @FXML Label hoeveelheidLbl;
     @FXML Button deleteBtn;
+    @FXML Button instellingenBtn;
 
 
 
-    public ToevoegingsComponent(Toevoeging toevoeging, ServiceContainter serviceContainter, MaaltijdComponent maaltijdComponent) {
+    public ToevoegingsComponent(Toevoeging toevoeging, ServiceContainter serviceContainter, StandaardMaaltijdComponent maaltijdComponent) {
         this.toevoeging = toevoeging;
         this.serviceContainter = serviceContainter;
         this.maaltijdComponent = maaltijdComponent;
@@ -61,19 +58,16 @@ public class ToevoegingsComponent extends VBox implements Initializable {
         eiwValueLbl.setText(decimalFormat.format(toevoeging.getEiwitWaarde()));
         vetValueLbl.setText(decimalFormat.format(toevoeging.getVetWaarde()));
 
-        deleteBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                try {
-                    serviceContainter.getMaaltijdService().removeItem(maaltijdComponent.getMaaltijd(), toevoeging);
-                    maaltijdComponent.refresh();
-                } catch (SQLException throwables) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle(throwables.getSQLState());
-                    alert.setHeaderText(throwables.getSQLState());
-                    alert.setContentText(throwables.getMessage());
-                    alert.show();
-                }
+        deleteBtn.setOnAction(actionEvent -> {
+            try {
+                serviceContainter.getMaaltijdService().removeItem(maaltijdComponent.getMaaltijd(), toevoeging);
+                maaltijdComponent.refresh();
+            } catch (SQLException throwables) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle(throwables.getSQLState());
+                alert.setHeaderText(throwables.getSQLState());
+                alert.setContentText(throwables.getMessage());
+                alert.show();
             }
         });
     }

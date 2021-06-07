@@ -1,7 +1,5 @@
 package org.example;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,7 +10,6 @@ import org.bart.services.ServiceContainter;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.BatchUpdateException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -30,11 +27,11 @@ public class ToevoegingAanmakenController implements Initializable {
     private ServiceContainter serviceContainter;
     private List<Item> items;
     private AlertController alertController;
-    private MaaltijdComponent maaltijdComponent;
+    private StandaardMaaltijdComponent maaltijdComponent;
 
 
 
-    public ToevoegingAanmakenController(ServiceContainter serviceContainter, AlertController alertController , MaaltijdComponent maaltijdComponent) {
+    public ToevoegingAanmakenController(ServiceContainter serviceContainter, AlertController alertController , StandaardMaaltijdComponent maaltijdComponent) {
         this.serviceContainter = serviceContainter;
         this.alertController = alertController;
         this.maaltijdComponent = maaltijdComponent;
@@ -52,6 +49,11 @@ public class ToevoegingAanmakenController implements Initializable {
             itemsListView.getItems().add(new ItemLabelComponent(item));
         }
         initButtons();
+        hoeveelheidTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                hoeveelheidTF.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
     }
 
     private void initButtons(){
